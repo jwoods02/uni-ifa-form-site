@@ -8,8 +8,20 @@ h1 {
 
 h2 {
   color: white;
+  text-align: center;
 }
 
-p{
+p {
   color: white;
+  text-align: center;
+}
+a {
+  color: white;
+
+}
+
+table{
+  color: white;
+  align-items: center;
+  margin: 0px auto;
 }
