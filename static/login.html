@@ -17,8 +17,8 @@
     </form>
     <script>
       function checkLogin() {
-        var username = document.forms["myForm"]["username"].value;
-        var password = document.forms["myForm"]["password"].value;
+        var username = document.forms["loginForm"]["username"].value;
+        var password = document.forms["loginForm"]["password"].value;
         params = 'username='+username+'&password='+password;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
@@ -26,7 +26,6 @@
         xhttp.onload = function() {
           if (xhttp.readyState === 4 && xhttp.status === 200) {
             console.log(xhttp.responseText);
-            document.getElementById("txt").innerHTML = xhttp.responseText;
           } else {
             console.error(xhttp.statusText);
           }
