@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+</head>
+
+<body>
+    <form id="loginForm" method="POST" onsubmit="return checkLogin()">
+        Username:
+        <input type="text" name="username"><br>
+        Password:
+        <input type="password" name="password"><br>
+        <button type="submit"> submit </button>
+    </form>
+    <script>
+      function checkLogin() {
+        var username = document.forms["loginForm"]["username"].value;
+        var password = document.forms["loginForm"]["password"].value;
+        params = 'username='+username+'&password='+password;
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.onload = function() {
+          if (xhttp.readyState === 4 && xhttp.status === 200) {
+            console.log(xhttp.responseText);
+          } else {
+            console.error(xhttp.statusText);
+          }
+        };
+        xhttp.send(params);
+        return false;
+      }
+
+
+    </script>
+</body>
+
+</html>
