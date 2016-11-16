@@ -66,7 +66,7 @@
    var Password = document.forms["myForm"]["Password"].value;
    params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+'&eMail='+eMail+'&Username='+Username+'&Password='+Password;
    var xhttp = new XMLHttpRequest();
-   xhttp.open("POST", '/Client/ClientAdd', true); // true is asynchronous
+   xhttp.open("POST", '/Client/ClientInsert', true); // true is asynchronous
    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
    xhttp.onload = function() {
      if (xhttp.readyState === 4 && xhttp.status === 200) {
