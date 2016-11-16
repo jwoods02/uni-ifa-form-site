@@ -25,5 +25,34 @@ def checkLogin():
             return 'Login failed'
 
 
+@app.route("/Client/addClient", methods = ['POST'])
+def customerAddDetails():
+    firstName = request.form.get('firstName', default="Error")#rem: args for get form for post
+    surname = request.form.get('surname', default="Error")
+    termLocation = request.form.get('termLocation', default="Error")
+    homeLocation = request.form.get('homeLocation', default="Error")
+    try:
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("INSERT INTO Customers ('firstName', 'surname', 'termLocation', 'homeLocation')\
+                     VALUES (?,?,?,?)",(firstName, surname, termLocation, homeLocation) )
+        conn.commit()
+        msg = "Record successfully added"
+    except:
+        conn.rollback()
+        msg = "error in insert operation"
+    finally:
+        return msg
+        conn.close()
+
+@app.route("/Client/ClientAdd")
+def ClientAdd():
+	return render_template('ClientData.html', msg = '')
+
+@app.route("/AddClient")
+def customer():
+	return render_template('AddClient.html', msg = '')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
