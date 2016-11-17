@@ -38,7 +38,7 @@ def ClientAddDetails():
     try:
         conn = sqlite3.connect(DATABASE)
         cur = conn.cursor()
-        cur.execute("INSERT INTO Clients ('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
+        cur.execute("INSERT INTO Accounts ('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
                      VALUES (?,?,?,?)",(AccountID, Forname, Surname, eMail, Username, Password) )
         conn.commit()
         msg = "Record successfully added"
