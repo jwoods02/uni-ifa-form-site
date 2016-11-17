@@ -76,7 +76,27 @@ def dependants():
 
 @app.route("/Health")
 def health():
-    return render_template('people/health.html', msg = '')	
+    return render_template('people/health.html', msg = '')
+
+@app.route("/Expenditure")
+def expenditure():
+    return render_template('finances/expenditure.html', msg = '')
+
+@app.route("/Income")
+def income():
+    return render_template('finances/income.html', msg = '')
+
+@app.route("/Liabilities")
+def liabilities():
+    return render_template('finances/liabilities.html', msg = '')
+
+@app.route("/Affordability")
+def affordability():
+    return render_template('finances/affordability.html', msg = '')
+
+@app.route("/Assets")
+def assets():
+    return render_template('finances/assets.html', msg = '')	
 
 if __name__ == "__main__":
     app.run(debug=True)
