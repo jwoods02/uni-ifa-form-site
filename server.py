@@ -10,6 +10,7 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 # [username, password]
 valid_logins = [['james', 'password1', 'client'], ['mert', 'password2', 'IFA']]
 
+
 @app.route("/CheckLogin", methods=['POST'])
 def checkLogin():
     print("Processing data")
@@ -57,6 +58,25 @@ def ClientAdd():
 def customer():
 	return render_template('AddClient.html', msg = '')
 
+@app.route("/Client")
+def clients():
+    return render_template('people/clients.html', msg = '')
+	
+@app.route("/taxStatus")
+def taxStatus():
+    return render_template('people/taxStatus.html', msg = '')
+	
+@app.route("/Occupation")
+def occupation():
+    return render_template('people/occupation.html', msg = '')
+
+@app.route("/Dependants")
+def dependants():
+    return render_template('people/dependants.html', msg = '')
+
+@app.route("/Health")
+def health():
+    return render_template('people/health.html', msg = '')	
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -8,37 +8,37 @@
 <body>
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#"> Welcome, NAME</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">People <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="../people/clients.html">Clients</a></li>
-        <li><a href="../people/taxStatus.html">Tax Status</a></li>
-        <li><a href="../people/occupation.html">Occupation</a></li>
-        <li><a href="../people/health.html">Health</a></li>
-        <li><a href="../people/dependants.html">Dependants</a></li>
-      </ul>
-      </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Finances <span class="caret"></span></a>
-      <ul class="dropdown-menu">
-        <li><a href="../finances/income.html">Income</a></li>
-        <li><a href="../finances/expenditure.html">Expenditures</a></li>
-        <li><a href="../finances/assets.html">Assets</a></li>
-        <li><a href="../finances/liabilities.html">Liabilities</a></li>
-        <li><a href="../finances/affordability.html">Affordability</a></li>
-      </ul>
-      </li>
-      <li><a href="#">Life Goals</a></li>
-      <li><a href="#">Advice Areas</a></li>
-      <li><a href="#">Cashflow</a></li>
-      <li><a href="#">Reports</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-    </ul>
+		<ul class="nav navbar-nav">
+			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">People <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="/Client">Clients</a></li>
+					<li><a href="/taxStatus">Tax Status</a></li>
+					<li><a href="/Occupation">Occupation</a></li>
+					<li><a href="/Health">Health</a></li>
+					<li><a href="/Dependants">Dependants</a></li>
+				</ul>
+			</li>
+			<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Finances <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="../finances/income.html">Income</a></li>
+					<li><a href="../finances/expenditure.html">Expenditures</a></li>
+					<li><a href="../finances/assets.html">Assets</a></li>
+					<li><a href="../finances/liabilities.html">Liabilities</a></li>
+					<li><a href="../finances/affordability.html">Affordability</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Life Goals</a></li>
+			<li><a href="#">Advice Areas</a></li>
+			<li><a href="#">Cashflow</a></li>
+			<li><a href="#">Reports</a></li>
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+		</ul>
     </div>
   </nav>
+  <article>
+    {% block mainBlock%}Page under construction. {%endblock%}
+  </article>
 </body>
 </html>
