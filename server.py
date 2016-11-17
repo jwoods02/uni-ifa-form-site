@@ -1,9 +1,9 @@
 import os
 from flask import Flask, redirect, request, render_template, jsonify
-
+import sqlite3
 app = Flask(__name__)
 
-DATABASE = 'database.db'
+DATABASE = 'static/database.db'
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -11,10 +11,11 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 valid_logins = [['james', 'password1', 'client'], ['mert', 'password2', 'IFA']]
 
 
+
 @app.route("/CheckLogin", methods=['POST'])
 def checkLogin():
     print("Processing data")
-    if request.method == 'POST':
+    '''if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         the_login_client = [username, password, "client"]
@@ -26,7 +27,15 @@ def checkLogin():
             return 'login successful. User is IFA'
         else:
             return 'Login failed'
-
+	'''
+    username = request.form['username']
+    password = request.form['password']
+    conn = sqlite3.connect(DATABASE)
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?", (username, password))
+    hello = cur.fetchall()
+    return render_template("people/clients.html")
+	
 
 @app.route("/Client/ClientInsert", methods = ['POST'])
 def ClientAddDetails():
