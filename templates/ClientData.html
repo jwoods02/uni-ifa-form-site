@@ -56,32 +56,5 @@
 <span id='txt'></span>
 <h3><a href=/AddClient>Back</h3>
 
-<!-- <script>
- function loadName() {
-   var AccountID = document.forms["myForm"]["AccountID"].value;
-   var Forname = document.forms["myForm"]["Forname"].value;
-   var Surname = document.forms["myForm"]["Surname"].value;
-   var eMail = document.forms["myForm"]["eMail"].value;
-   var Username = document.forms["myForm"]["Username"].value;
-   var Password = document.forms["myForm"]["Password"].value;
-   params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+'&eMail='+eMail+'&Username='+Username+'&Password='+Password;
-   var xhttp = new XMLHttpRequest();
-   xhttp.open("POST", '/Client/ClientInsert', true); // true is asynchronous
-   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   xhttp.onload = function() {
-     if (xhttp.readyState === 4 && xhttp.status === 200) {
-       console.log(xhttp.responseText);
-       document.getElementById("txt").innerHTML = xhttp.responseText;
-     } else {
-       console.error(xhttp.statusText);
-     }
-   };
-   xhttp.send(params);
-   return false;
-   {{msg}}
- }
-
-</script> -->
-
 <body>
 </html>
