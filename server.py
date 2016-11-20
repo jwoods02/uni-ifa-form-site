@@ -1,5 +1,6 @@
 import os
 from flask import Flask, redirect, request, render_template, jsonify
+import sqlite3
 
 app = Flask(__name__)
 
@@ -30,25 +31,21 @@ def checkLogin():
 
 @app.route("/Client/ClientInsert", methods = ['POST'])
 def ClientAddDetails():
-    AccountID = request.form.get('AccountID', default="Error")#rem: args for get form for post
+    AccountID = request.form.get('AccountID', default="Error")  #rem: args for get form for post
     Forname = request.form.get('Forname', default="Error")
     Surname = request.form.get('Surname', default="Error")
     eMail = request.form.get('eMail', default="Error")
     Username = request.form.get('Username', default="Error")
     Password = request.form.get('Password', default="Error")
-    try:
-        conn = sqlite3.connect(DATABASE)
-        cur = conn.cursor()
-        cur.execute("INSERT INTO Accounts ('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
-                     VALUES (?,?,?,?)",(AccountID, Forname, Surname, eMail, Username, Password) )
-        conn.commit()
-        msg = "Record successfully added"
-    except:
-        conn.rollback()
-        msg = "error in insert operation"
-    finally:
-        return msg
-        conn.close()
+
+    conn = sqlite3.connect(DATABASE)
+    details = [(AccountID, Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
+                    VALUES (?,?,?,?,?,?)",details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return msg
 
 @app.route("/Client/ClientAdd")
 def ClientAdd():
@@ -61,11 +58,11 @@ def customer():
 @app.route("/Client")
 def clients():
     return render_template('people/clients.html', msg = '')
-	
+
 @app.route("/taxStatus")
 def taxStatus():
     return render_template('people/taxStatus.html', msg = '')
-	
+
 @app.route("/Occupation")
 def occupation():
     return render_template('people/occupation.html', msg = '')
@@ -96,7 +93,7 @@ def affordability():
 
 @app.route("/Assets")
 def assets():
-    return render_template('finances/assets.html', msg = '')	
+    return render_template('finances/assets.html', msg = '')
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -43,7 +43,7 @@
 <body>
 
 <h2>Client Data</h2>
-<form id='myForm' onsubmit="return loadName()">
+<form id='myForm' action="/Client/ClientInsert" method="post">
  AccountID :<input type = "integer" name = "AccountID"><br>
  Forname :<input type = "text" name = "Forname"><br>
  Surname <input type = "text" name = "Surname"><br>
@@ -56,7 +56,7 @@
 <span id='txt'></span>
 <h3><a href=/AddClient>Back</h3>
 
-<script>
+<!-- <script>
  function loadName() {
    var AccountID = document.forms["myForm"]["AccountID"].value;
    var Forname = document.forms["myForm"]["Forname"].value;
@@ -78,9 +78,10 @@
    };
    xhttp.send(params);
    return false;
+   {{msg}}
+ }
 
-
-</script>
+</script> -->
 
 <body>
 </html>
