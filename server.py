@@ -16,39 +16,39 @@ def login():
     return render_template('login/login.html', msg = '')
 
 
-# @app.route("/CheckLogin", methods=['POST'])
-# def checkLogin():
-#     print("Processing data")
-#     if request.method == 'POST':
-#         username = request.form['username']
-#         password = request.form['password']
-#         conn = sqlite3.connect(DATABASE)
-#         cur = conn.cursor()
-#         cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?", (username, password))
-#         outcome = cur.fetchall()
-#         if len(outcome) > 0:
-#             return "/Client"
-#         else:
-#             return "/Login"
-#
-#
-# @app.route("/Client/ClientInsert", methods = ['POST'])
-# def ClientAddDetails():
-#     AccountID = request.form.get('AccountID', default="Error")  #rem: args for get form for post
-#     Forname = request.form.get('Forname', default="Error")
-#     Surname = request.form.get('Surname', default="Error")
-#     eMail = request.form.get('eMail', default="Error")
-#     Username = request.form.get('Username', default="Error")
-#     Password = request.form.get('Password', default="Error")
-#
-#     conn = sqlite3.connect(DATABASE)
-#     details = [(AccountID, Forname, Surname, eMail, Username, Password)]
-#     conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
-#                     VALUES (?,?,?,?,?,?)",details)
-#     conn.commit()
-#     conn.close()
-#     msg = "Completed."
-#     return msg
+@app.route("/CheckLogin", methods=['POST'])
+def checkLogin():
+    print("Processing data")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?", (username, password))
+        outcome = cur.fetchall()
+        if len(outcome) > 0:
+            return "/Client"
+        else:
+            return "/Login"
+
+
+@app.route("/Client/ClientInsert", methods = ['POST'])
+def ClientAddDetails():
+    AccountID = request.form.get('AccountID', default="Error")  #rem: args for get form for post
+    Forname = request.form.get('Forname', default="Error")
+    Surname = request.form.get('Surname', default="Error")
+    eMail = request.form.get('eMail', default="Error")
+    Username = request.form.get('Username', default="Error")
+    Password = request.form.get('Password', default="Error")
+
+    conn = sqlite3.connect(DATABASE)
+    details = [(AccountID, Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname', 'eMail', 'Username', 'Password')\
+                    VALUES (?,?,?,?,?,?)",details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return msg
 
 
 @app.route("/AddDetails", methods = ['POST'])
