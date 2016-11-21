@@ -13,7 +13,7 @@ valid_logins = [['james', 'password1', 'client'], ['mert', 'password2', 'IFA']]
 
 @app.route("/Login")
 def login():
-	return render_template('login/login.html', msg = '')
+    return render_template('login/login.html', msg = '')
 
 
 @app.route("/CheckLogin", methods=['POST'])
