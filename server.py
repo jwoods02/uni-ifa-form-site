@@ -62,6 +62,10 @@ def customer():
 def clients():
     return render_template('people/clients.html', msg = '')
 
+@app.route("/AddDetails")
+def details():
+    return render_template('clientdetail.html', msg = '')
+
 @app.route("/taxStatus")
 def taxStatus():
     return render_template('people/taxStatus.html', msg = '')
