@@ -1,5 +1,5 @@
 import os
-from flask import Flask, redirect, request, render_template, jsonify
+from flask import Flask, redirect, url_for, request, render_template, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -19,23 +19,14 @@ def checkLogin():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        the_login_client = [username, password, "client"]
-        the_login_IFA = [username, password, "IFA"]
-
-        if the_login_client in valid_logins:
-            return 'login successful. User is client'
-        elif the_login_IFA in valid_logins:
-            return 'login successful. User is IFA'
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?", (username, password))
+        outcome = cur.fetchall()
+        if len(outcome) > 0:
+            return "/Client"
         else:
-            return 'Login failed'
-
-    username = request.form['username']
-    password = request.form['password']
-    conn = sqlite3.connect(DATABASE)
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?", (username, password))
-    hello = cur.fetchall()
-    return render_template("people/clients.html")
+            return "login.html"
 
 
 @app.route("/Client/ClientInsert", methods = ['POST'])

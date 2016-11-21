@@ -20,13 +20,13 @@
 					<div class="form-group">
 						<input type="text" class="form-control input-lg" name="username" placeholder="Username"/>
 					</div>
-	
+
 					<div class="form-group">
 						<input type="password" class="form-control input-lg" name="password" placeholder="Password"/>
 					</div>
 
 					<div class="form-group">
-						<input onClick=window.location.href="/Client" type="submit" class="btn btn-block btn-lg btn-warning" name="submit" value="Login"/>
+						<input type="submit" class="btn btn-block btn-lg btn-warning" name="submit" value="Login"/>
 					</div>
 				</div>
 			</div>
@@ -42,7 +42,7 @@
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.onload = function() {
           if (xhttp.readyState === 4 && xhttp.status === 200) {
-            console.log(xhttp.responseText);
+              window.location = xhttp.responseText;
           } else {
             console.error(xhttp.statusText);
           }
