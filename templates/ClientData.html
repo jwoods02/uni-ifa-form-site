@@ -1,58 +1,47 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <title>Add CLient</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#"> Welcome, NAME</a>
-  </div>
-  <ul class="nav navbar-nav">
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">People <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li><a href="clients.html">Clients</a></li>
-      <li><a href="taxStatus.html">Tax Status</a></li>
-      <li><a href="occupation.html">Occupation</a></li>
-      <li><a href="health.html">Health</a></li>
-      <li><a href="dependants.html">Dependants</a></li>
-    </ul>
-    </li>
-    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Finances <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li><a href="income.html">Income</a></li>
-      <li><a href="expenditure.html">Expenditures</a></li>
-      <li><a href="assets.html">Assets</a></li>
-      <li><a href="liabilities.html">Liabilities</a></li>
-      <li><a href="affordability.html">Affordability</a></li>
-    </ul>
-    </li>
-    <li><a href="#">Life Goals</a></li>
-    <li><a href="#">Advice Areas</a></li>
-    <li><a href="#">Cashflow</a></li>
-    <li><a href="#">Reports</a></li>
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-  </ul>
-  </div>
-</nav>
-<body>
+{%extends 'blocks/nav.html'%}
 
-<h2>Client Data</h2>
-<form id='myForm' action="/Client/ClientInsert" method="post">
- AccountID :<input type = "integer" name = "AccountID"><br>
- Forname :<input type = "text" name = "Forname"><br>
- Surname <input type = "text" name = "Surname"><br>
- eMail :<input type = "text" name = "eMail"><br>
- Username :<input type = "text" name = "Username"><br>
- Password :<input type = "text" name = "Password"><br>
+{%block mainBlock%}
+<div class="container">
+    <h2 class="page-header">Client Data</h2>
+    <form id='myForm' action="/Client/ClientInsert" method="post">
+        <div class="form-group">
+            <label for="AccountID">AccountID</label>
+            <input type="integer" name="AccountID" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Forname">Forname:</label>
+            <input type="text" name="Forname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Surname">Surname:</label>
+            <input type="text" name="Surname" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="eMail">Email:</label>
+            <input type="text" name="eMail" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Usrname">Username:</label>
+            <input type="text" name="Username" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Password">Password:</label>
+            <input type="text" name="Password" class="form-control">
+        </div>
+        <button type="submit" onclick="f1()" class="btn btn-default">Submit</button>
+    </form>
+    <span id='txt'></span>
+    <br>
+    <button class="btn btn-default"><a href=/AddClient>Back</button>
+</div>
 
- <button type = "submit" onclick="f1()"> submit </button>
-</form>
+<!-- <form id='myForm' action="/Client/ClientInsert" method="post">
+    AccountID :<input type="integer" name="AccountID"><br> Forname :<input type="text" name="Forname"><br> Surname <input type="text" name="Surname"><br> eMail :<input type="text" name="eMail"><br> Username :<input type="text" name="Username"><br> Password
+    :<input type="text" name="Password"><br>
+
+    <button type="submit" onclick="f1()"> submit </button>
+</form> -->
+
 <!-- <script>
       function f1() {
           var x = document.forms["myForm"]["Forname"].value;
@@ -61,7 +50,5 @@
               return false;
             }}
 </script> -->
-<span id='txt'></span>
-<h3><a href=/AddClient>Back</h3>
-<body>
-</html>
+
+{%endblock%}

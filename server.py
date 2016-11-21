@@ -11,6 +11,9 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 # [username, password]
 valid_logins = [['james', 'password1', 'client'], ['mert', 'password2', 'IFA']]
 
+@app.route("/Login")
+def login():
+	return render_template('login/login.html', msg = '')
 
 
 @app.route("/CheckLogin", methods=['POST'])
@@ -26,7 +29,7 @@ def checkLogin():
         if len(outcome) > 0:
             return "/Client"
         else:
-            return "login.html"
+            return "/Login"
 
 
 @app.route("/Client/ClientInsert", methods = ['POST'])
