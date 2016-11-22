@@ -42,9 +42,9 @@ def ClientAddDetails():
 
     conn = sqlite3.connect(DATABASE)
     details = [(AccountID, Forname, Surname, eMail, Username, Password)]
-    conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname',
-                     'eMail', 'Username', 'Password')
-                     VALUES(?, ?, ?, ?, ?, ?)", details)
+    conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname',\
+                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?, ?)"
+                     , details)
     conn.commit()
     conn.close()
     msg = "Completed."
@@ -77,12 +77,12 @@ def AddDetails():
     details = [(firstname, surname, gender, dob, address1, address2, address3,
                address4, postcode, town, country, phone, fax, mobile, email,
                taxstatus, occupation, religion, circumstances)]
-    conn.executemany("INSERT INTO `Clients`('firstname', 'surname', 'gender',
-                     'dob', 'address1', 'address2', 'address3', 'address4',
-                     'postcode', 'town', 'country', 'phone', 'fax', 'mobile',
-                     'email', 'taxstatus', 'occupation', 'religion',
-                     'circumstances')
-                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+    conn.executemany("INSERT INTO `Clients`('firstname', 'surname', 'gender',\
+                     'dob', 'address1', 'address2', 'address3', 'address4',\
+                     'postcode', 'town', 'country', 'phone', 'fax', 'mobile',\
+                     'email', 'taxstatus', 'occupation', 'religion',\
+                     'circumstances') \
+                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,\
                             ?, ?)", details)
     conn.commit()
     conn.close()
