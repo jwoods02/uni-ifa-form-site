@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,35 +10,77 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Login</title>
 </head>
-
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
 <body>
-    <form id="loginForm" method="POST" onsubmit="return checkLogin()">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="text-center">Welcome</h1>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control input-lg" name="username" placeholder="Username" />
-                    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
 
-                    <div class="form-group">
-                        <input type="password" class="form-control input-lg" name="password" placeholder="Password" />
-                    </div>
+            <div class="modal-header">
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li role="presentation"><a href="#ifa" aria-controls="ifa" role="tab" data-toggle="tab">IFA</a></li>
+                    <li role="presentation"><a href="#client" aria-controls="client" role="tab" data-toggle="tab">Client</a></li>
+                </ul>
 
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-block btn-lg btn-primary" name="submit" value="Login" />
-                    </div>
-                </div>
             </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane" id="ifa">
+                    <h1 class="page-header center"> IFA Login </h1>
+                    <form id="ifaForm" method="POST" onsubmit="return checkIFALogin()">
+                        <div class="modal-dialog">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-block btn-lg btn-primary" name="submit" value="Login" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="client">
+                    <h1 class="page-header center"> Client Login </h1>
+                    <form id="clientForm" method="POST" onsubmit="return checkClientLogin()">
+                        <div class="modal-dialog">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input type="text" class="form-control input-lg" name="username" placeholder="Username" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" class="form-control input-lg" name="password" placeholder="Password" />
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-block btn-lg btn-primary" name="submit" value="Login" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
         </div>
-    </form>
+    </div>
 
     <script>
-        function checkLogin() {
-            var username = document.forms["loginForm"]["username"].value;
-            var password = document.forms["loginForm"]["password"].value;
+        function checkIFALogin() {
+            var username = document.forms["ifaForm"]["username"].value;
+            var password = document.forms["ifaForm"]["password"].value;
             params = 'username=' + username + '&password=' + password;
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
@@ -51,7 +94,26 @@
             };
             xhttp.send(params);
             return false;
-        }
+        };
+
+        function checkClientLogin() {
+            var username = document.forms["clientForm"]["username"].value;
+            var password = document.forms["clientForm"]["password"].value;
+            params = 'username=' + username + '&password=' + password;
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.onload = function() {
+                if (xhttp.readyState === 4 && xhttp.status === 200) {
+                    window.location = xhttp.responseText;
+                } else {
+                    console.error(xhttp.statusText);
+                }
+            };
+            xhttp.send(params);
+            return false;
+        };
+
     </script>
 </body>
 
