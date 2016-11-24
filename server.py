@@ -1,12 +1,37 @@
 import os
 from flask import Flask, redirect, url_for, request, render_template, jsonify
 import sqlite3
+import uuid
+import hashlib
 
 app = Flask(__name__)
 
 DATABASE = 'database.db'
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
+# From http://pythoncentral.io/hashing-strings-with-python/
+def hash_password(password):
+    # uuid is used to generate a random number
+    salt = uuid.uuid4().hex
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' \
+           + salt
+
+
+def hashed_password(hashed_password, user_password):
+    password, salt = hashed_password.split(':')
+    return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest() \
+           + ":" + salt
+
+# new_pass = input('Please enter a password: ')
+# hashed_password = hash_password(new_pass)
+# print('The string to store in the db is: ' + hashed_password)
+# old_pass = input('Now please enter the password again to check: ')
+# if check_password(hashed_password, old_pass):
+#     print('You entered the right password')
+# else:
+#     print('I am sorry but the password does not match')
 
 
 @app.route("/Login")
@@ -22,13 +47,19 @@ def checkLogin():
         password = request.form['password']
         conn = sqlite3.connect(DATABASE)
         cur = conn.cursor()
-        cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?",
-                    (username, password))
-        outcome = cur.fetchall()
-        if len(outcome) > 0:
-            return "/Client"
-        else:
-            return "/Login"
+        cur.execute("SELECT Password FROM Accounts WHERE Username=?",
+                    (username,))
+        actual_password = cur.fetchall()
+        actual_password = actual_password[0][0]
+        if actual_password != "":
+            password = hashed_password(actual_password, password)
+            cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?",
+                        (username, password))
+            outcome = cur.fetchall()
+            if len(outcome) > 0:
+                return "/Client"
+            else:
+                return "/Login"
 
 
 @app.route("/Client/ClientInsert", methods=['POST'])
@@ -39,6 +70,7 @@ def ClientAddDetails():
     eMail = request.form.get('eMail', default="Error")
     Username = request.form.get('Username', default="Error")
     Password = request.form.get('Password', default="Error")
+    Password = hash_password(Password)
 
     conn = sqlite3.connect(DATABASE)
     details = [(AccountID, Forname, Surname, eMail, Username, Password)]
