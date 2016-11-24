@@ -1,17 +1,42 @@
 import os
-from flask import Flask, redirect, url_for, request, render_template, jsonify
 import sqlite3
 import uuid
 import hashlib
+from flask import Flask, redirect, url_for, request, render_template, session
+from functools import wraps
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 
 DATABASE = 'database.db'
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
-# From http://pythoncentral.io/hashing-strings-with-python/
+# Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        try:
+            if session['user'] is None:
+                return redirect(url_for('login', next=request.url))
+            return f(*args, **kwargs)
+        except KeyError:
+            return redirect(url_for('login', next=request.url))
+    return decorated_function
+
+
+# Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if g.admin is None:
+            return redirect(url_for('login', next=request.url))
+        return f(*args, **kwargs)
+    return decorated_function
+
+
+# Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hash_password(password):
     # uuid is used to generate a random number
     salt = uuid.uuid4().hex
@@ -19,19 +44,11 @@ def hash_password(password):
            + salt
 
 
+# Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hashed_password(hashed_password, user_password):
     password, salt = hashed_password.split(':')
     return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest() \
            + ":" + salt
-
-# new_pass = input('Please enter a password: ')
-# hashed_password = hash_password(new_pass)
-# print('The string to store in the db is: ' + hashed_password)
-# old_pass = input('Now please enter the password again to check: ')
-# if check_password(hashed_password, old_pass):
-#     print('You entered the right password')
-# else:
-#     print('I am sorry but the password does not match')
 
 
 @app.route("/Login")
@@ -57,9 +74,17 @@ def checkLogin():
                         (username, password))
             outcome = cur.fetchall()
             if len(outcome) > 0:
+                session['user'] = username
                 return "/Client"
             else:
                 return "/Login"
+
+
+@app.route("/Logout")
+def logout():
+    session['user'] = None
+    session['admin'] = None
+    return redirect(url_for('login'))
 
 
 @app.route("/Client/ClientInsert", methods=['POST'])
@@ -83,6 +108,7 @@ def ClientAddDetails():
     return msg
 
 
+@login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
     firstname = request.form.get('firstname', default="Error")
@@ -123,66 +149,78 @@ def AddDetails():
 
 
 @app.route("/Client/ClientAdd")
+@login_required
 def ClientAdd():
     return render_template('ClientData.html', msg='')
 
-
 @app.route("/AddClient")
+@login_required
 def customer():
     return render_template('clientdetail.html', msg='')
 
 
 @app.route("/Client")
+@login_required
 def clients():
     return render_template('people/clients.html', msg='')
 
 
 @app.route("/AddDetails")
+@login_required
 def details():
     return render_template('clientdetail.html', msg='')
 
 
 @app.route("/taxStatus")
+@login_required
 def taxStatus():
     return render_template('people/taxStatus.html', msg='')
 
 
 @app.route("/Occupation")
+@login_required
 def occupation():
     return render_template('people/occupation.html', msg='')
 
 
 @app.route("/Dependants")
+@login_required
 def dependants():
     return render_template('people/dependants.html', msg='')
 
 
 @app.route("/Health")
+@login_required
 def health():
     return render_template('people/health.html', msg='')
 
 
 @app.route("/Expenditure")
+@login_required
 def expenditure():
     return render_template('finances/expenditure.html', msg='')
 
 
 @app.route("/Income")
+@login_required
 def income():
     return render_template('finances/income.html', msg='')
 
 
 @app.route("/Liabilities")
+@login_required
 def liabilities():
     return render_template('finances/liabilities.html', msg='')
 
 
 @app.route("/Affordability")
+@login_required
 def affordability():
     return render_template('finances/affordability.html', msg='')
 
 
 @app.route("/Assets")
+@login_required
 def assets():
     return render_template('finances/assets.html', msg='')
 
