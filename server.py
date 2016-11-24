@@ -54,10 +54,6 @@ def ClientAddDetails():
 def ClientAdd():
 	return render_template('ClientData.html', msg = '')
 
-@app.route("/AddClient")
-def customer():
-	return render_template('AddClient.html', msg = '')
-
 @app.route("/Client")
 def clients():
     return render_template('people/clients.html', msg = '')
