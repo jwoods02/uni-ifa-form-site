@@ -64,13 +64,13 @@ def checkLogin():
         password = request.form['password']
         conn = sqlite3.connect(DATABASE)
         cur = conn.cursor()
-        cur.execute("SELECT Password FROM Accounts WHERE Username=?",
+        cur.execute("SELECT Password FROM ClientAccounts WHERE Username=?",
                     (username,))
         actual_password = cur.fetchall()
         actual_password = actual_password[0][0]
         if actual_password != "":
             password = hashed_password(actual_password, password)
-            cur.execute("SELECT * FROM Accounts WHERE Username=? AND Password=?",
+            cur.execute("SELECT * FROM ClientAccounts WHERE Username=? AND Password=?",
                         (username, password))
             outcome = cur.fetchall()
             if len(outcome) > 0:
@@ -111,7 +111,7 @@ def HealthData():
 
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
-    AccountID = request.form.get('AccountID', default="Error")
+    ClientAccountID = request.form.get('ClientAccountID', default="Error")
     Forname = request.form.get('Forname', default="Error")
     Surname = request.form.get('Surname', default="Error")
     eMail = request.form.get('eMail', default="Error")
@@ -120,8 +120,8 @@ def ClientAddDetails():
     Password = hash_password(Password)
 
     conn = sqlite3.connect(DATABASE)
-    details = [(AccountID, Forname, Surname, eMail, Username, Password)]
-    conn.executemany("INSERT INTO `Accounts`('AccountID', 'Forname', 'Surname',\
+    details = [(ClientAccountID, Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `ClientAccounts`('ClientAccountID', 'Forname', 'Surname',\
                      'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?, ?)"
                      , details)
     conn.commit()
@@ -165,7 +165,7 @@ def AddDetails():
                maritalstatus, maidenname, retire, taxstatus, occupation,
                religion, circumstances, address1, address2, address3, address4,
                postcode, town, country, phone, fax, mobile, email)]
-    conn.executemany("INSERT INTO `Clients`('title', 'firstname', 'initials',\
+    conn.executemany("INSERT INTO `ClientDetails`('title', 'firstname', 'initials',\
                      'surname', 'prefers', 'age', 'gender', 'dob',\
                      'maritalstatus', 'maidenname', 'retire', 'taxstatus',\
                      'occupation', 'religion', 'circumstances', 'address1',\
