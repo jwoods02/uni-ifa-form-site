@@ -1,4 +1,69 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Health </h1>
+<div class="container">
+    <h2 class="page-header">Health</h2>
+    <form id='myForm' action="/Client/ClientInsert" method="post">
+		<div class="row">       
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="goodHealth">Good Health?:</label>
+					<input type="integer" name="goodHealth" class="form-control" placeholder="Yes or No">
+				</div>
+			</div>	
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="Smoker">Do you Smoke?:</label>
+					<input type="text" name="Smoker" class="form-control" placeholder="Yes or No">
+				</div>
+			</div>	
+			<div class="col-xs-3">
+				<div class="form-group" >
+					<label for="smokeADay">How many a day?:</label>
+					<input type="text" name="smokeADay" class="form-control">
+				</div>
+			</div>
+			<div class="col-xs-2">	
+				<div class="form-group">
+					<label for="Drinker">Do you Drink?:</label>
+					<input type="text" name="Drinker" class="form-control" placeholder="Yes or No">
+				</div>
+			</div>	
+			<div class="col-xs-3">
+				<div class="form-group">
+					<label for="eMail">How many Units a week?:</label>
+					<input type="text" name="eMail" class="form-control">
+				</div>
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="height">Height:</label>
+					<input type="text" name="height" class="form-control" placeholder="Centimeters">
+				</div>
+			</div>	
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="weight">Weight:</label>
+					<input type="text" name="weight" class="form-control" placeholder="Kilograms">
+				</div>
+			</div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="healthConditions">Health Conditions?:</label>
+                    <input type="text" name="healthConditions" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="hazardousPursuits">Hazardous Pursuits ?:</label>
+                    <input type="text" name="hazardousPursuits" class="form-control">
+                </div>
+            </div>
+        </div>        
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <span id='txt'></span>
+    
+</div>
 {%endblock%}
