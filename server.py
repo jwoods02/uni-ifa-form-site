@@ -111,10 +111,21 @@ def ClientAddDetails():
 @login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
+    title = request.form.get('title', default="Error")
     firstname = request.form.get('firstname', default="Error")
+    initials = request.form.get('initials', default="Error")
     surname = request.form.get('surname', default="Error")
+    prefers = request.form.get('prefers', default="Error")
+    age = request.form.get('age', default="Error")
     gender = request.form.get('gender', default="Error")
     dob = request.form.get('dob', default="Error")
+    maritalstatus = request.form.get('marital', default="Error")
+    maidenname = request.form.get('maidenname', default="Error")
+    retire = request.form.get('retire', default="Error")
+    taxstatus = request.form.get('taxstatus', default="Error")
+    occupation = request.form.get('occupation', default="Error")
+    religion = request.form.get('religion', default="Error")
+    circumstances = request.form.get('circumstances', default="Error")
     address1 = request.form.get('address1', default="Error")
     address2 = request.form.get('address2', default="Error")
     address3 = request.form.get('address3', default="Error")
@@ -126,22 +137,20 @@ def AddDetails():
     fax = request.form.get('fax', default="Error")
     mobile = request.form.get('mobile', default="Error")
     email = request.form.get('email', default="Error")
-    taxstatus = request.form.get('taxstatus', default="Error")
-    occupation = request.form.get('occupation', default="Error")
-    religion = request.form.get('religion', default="Error")
-    circumstances = request.form.get('circumstances', default="Error")
 
     conn = sqlite3.connect(DATABASE)
-    details = [(firstname, surname, gender, dob, address1, address2, address3,
-               address4, postcode, town, country, phone, fax, mobile, email,
-               taxstatus, occupation, religion, circumstances)]
-    conn.executemany("INSERT INTO `Clients`('firstname', 'surname', 'gender',\
-                     'dob', 'address1', 'address2', 'address3', 'address4',\
-                     'postcode', 'town', 'country', 'phone', 'fax', 'mobile',\
-                     'email', 'taxstatus', 'occupation', 'religion',\
-                     'circumstances') \
+    details = [(title, firstname, initials, surname, prefers, age, gender, dob,
+               maritalstatus, maidenname, retire, taxstatus, occupation,
+               religion, circumstances, address1, address2, address3, address4,
+               postcode, town, country, phone, fax, mobile, email)]
+    conn.executemany("INSERT INTO `Clients`('title', 'firstname', 'initials',\
+                     'surname', 'prefers', 'age', 'gender', 'dob',\
+                     'maritalstatus', 'maidenname', 'retire', 'taxstatus',\
+                     'occupation', 'religion', 'circumstances', 'address1',\
+                     'address2', 'address3', 'address4', 'postcode', 'town',\
+                     'country', 'phone', 'fax', 'mobile', 'email') \
                      VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,\
-                            ?, ?)", details)
+                            ?, ?, ?, ?, ?, ?, ?, ?, ?)", details)
     conn.commit()
     conn.close()
     msg = "Details Added."
