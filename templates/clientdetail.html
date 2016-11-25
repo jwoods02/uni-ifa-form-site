@@ -1,85 +1,176 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-
 <div class="container">
     <h2 class="page-header">Client Detail</h2>
-    <form id='myForm' class="form-inline" action="/AddDetails" method="post">
+    <form id='myForm' action="/AddDetails" method="post">
+    <h4> Personal Details</h4>
+    <div class="row">
+      <div class="col-xs-1">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
         <div class="form-group">
             <label for="firstname">First Name:</label>
             <input type="text" name="firstname" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-1">
+        <div class="form-group">
+            <label for="initials">Initials:</label>
+            <input type="text" name="initials" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
         <div class="form-group">
             <label for="surname">Surname:</label>
             <input type="text" name="surname" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
-            <label for="gender">Gender:</label>
-            <input type="text" name="gender" class="form-control">
+            <label for="prefers">Preferred Name:</label>
+            <input type="text" name="prefers" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-1">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="text" name="age" class="form-control">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-1">
+        <div class="form-group">
+          <label for="gender">Gender:</label><br>
+          <input type="radio" name="gender" value="Male" checked> Male<br>
+          <input type="radio" name="gender" value="Female"> Female<br>
+          <input type="radio" name="gender" value="Other"> Other
+        </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
             <label for="dob">Date of Birth:</label>
-            <input type="text" name="dob" class="form-control">
+            <input type="text" name="dob" placeholder="DD/MM/YYYY" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
-            <label for="address1">Address Line 1:</label>
-            <input type="text" name="address1" class="form-control">
+            <label for="marital status">Marital Status:</label>
+            <input type="text" name="maritalstatus" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
-            <label for="address2">Address Line 2:</label>
-            <input type="text" name="address2" class="form-control">
+            <label for="maidenname">Maiden Name (If Applicable):</label>
+            <input type="text" name="maidenname" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-1">
         <div class="form-group">
-            <label for="address3">Address Line 3:</label>
-            <input type="text" name="address3" class="form-control">
+            <label for="retire">Retirement Age:</label>
+            <input type="text" name="retire" class="form-control">
         </div>
-        <div class="form-group">
-            <label for="address4">Address Line 4:</label>
-            <input type="text" name="address4" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="postcode">Postcode:</label>
-            <input type="text" name="postcode" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="town">Town:</label>
-            <input type="text" name="town" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="country">Country:</label>
-            <input type="text" name="country" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone Number:</label>
-            <input type="text" name="phone" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="fax">Fax Number:</label>
-            <input type="text" name="fax" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="mobile">Mobile:</label>
-            <input type="text" name="mobile" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" name="email" class="form-control">
-        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2">
         <div class="form-group">
             <label for="taxstatus">Tax Status:</label>
             <input type="text" name="taxstatus" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
             <label for="occupation">Occupation:</label>
             <input type="text" name="occupation" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
             <label for="religion">Religious Beliefs:</label>
             <input type="text" name="religion" class="form-control">
         </div>
+      </div>
+      <div class="col-xs-2">
         <div class="form-group">
             <label for="circumstances">Anticipated Changes to Circumstances:</label>
             <input type="text" name="circumstances" class="form-control">
         </div>
+      </div>
+    </div>
+    <h4> Contact Information </h2>
+    <div class="row">
+      <div class="col-xs-3">
+        <div class="form-group">
+            <label for="address1">Address Line 1:</label>
+            <input type="text" name="address1" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+            <label for="address2">Address Line 2:</label>
+            <input type="text" name="address2" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+            <label for="address3">Address Line 3:</label>
+            <input type="text" name="address3" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+            <label for="address4">Address Line 4:</label>
+            <input type="text" name="address4" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="postcode">Postcode:</label>
+            <input type="text" name="postcode" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="town">Town:</label>
+            <input type="text" name="town" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" name="country" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="phone">Phone Number:</label>
+            <input type="text" name="phone" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="fax">Fax Number:</label>
+            <input type="text" name="fax" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+            <label for="mobile">Mobile:</label>
+            <input type="text" name="mobile" class="form-control">
+        </div>
+      </div>
+      <div class="col-xs-3">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" name="email" class="form-control">
+        </div>
+      </div>
+    </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <span id='txt'></span>
