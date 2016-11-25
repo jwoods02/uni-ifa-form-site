@@ -2,12 +2,12 @@
 {%block mainBlock%}
 <div class="container">
     <h2 class="page-header">Health</h2>
-    <form id='myForm' action="/Client/ClientInsert" method="post">
+    <form id='myForm' action="/HealthData" method="post">
 		<div class="row">       
 			<div class="col-xs-2">
 				<div class="form-group">
-					<label for="goodHealth">Good Health?:</label>
-					<input type="integer" name="goodHealth" class="form-control" placeholder="Yes or No">
+					<label for="GoodHealth">Good Health?:</label>
+					<input type="text" name="GoodHealth" class="form-control" placeholder="Yes or No">
 				</div>
 			</div>	
 			<div class="col-xs-2">
@@ -18,8 +18,8 @@
 			</div>	
 			<div class="col-xs-3">
 				<div class="form-group" >
-					<label for="smokeADay">How many a day?:</label>
-					<input type="text" name="smokeADay" class="form-control">
+					<label for="SmokeADay">How many a day?:</label>
+					<input type="integer" name="SmokeADay" class="form-control">
 				</div>
 			</div>
 			<div class="col-xs-2">	
@@ -30,34 +30,34 @@
 			</div>	
 			<div class="col-xs-3">
 				<div class="form-group">
-					<label for="eMail">How many Units a week?:</label>
-					<input type="text" name="eMail" class="form-control">
+					<label for="Units">How many Units a week?:</label>
+					<input type="integer" name="Units" class="form-control">
 				</div>
 			</div>
 		</div>		
 		<div class="row">
 			<div class="col-xs-2">
 				<div class="form-group">
-					<label for="height">Height:</label>
-					<input type="text" name="height" class="form-control" placeholder="Centimeters">
+					<label for="Height">Height:</label>
+					<input type="integer" name="Height" class="form-control" placeholder="Centimeters">
 				</div>
 			</div>	
 			<div class="col-xs-2">
 				<div class="form-group">
-					<label for="weight">Weight:</label>
-					<input type="text" name="weight" class="form-control" placeholder="Kilograms">
+					<label for="Weight">Weight:</label>
+					<input type="integer" name="Weight" class="form-control" placeholder="Kilograms">
 				</div>
 			</div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="healthConditions">Health Conditions?:</label>
-                    <input type="text" name="healthConditions" class="form-control">
+                    <label for="HealthConditions">Health Conditions?:</label>
+                    <input type="text" name="HealthConditions" class="form-control">
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="hazardousPursuits">Hazardous Pursuits ?:</label>
-                    <input type="text" name="hazardousPursuits" class="form-control">
+                    <label for="HazardousPursuits">Hazardous Pursuits ?:</label>
+                    <input type="text" name="HazardousPursuits" class="form-control">
                 </div>
             </div>
         </div>        

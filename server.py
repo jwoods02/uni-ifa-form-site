@@ -86,6 +86,28 @@ def logout():
     session['admin'] = None
     return redirect(url_for('login'))
 
+@app.route("/HealthData", methods=['POST'])
+def HealthData():
+    GoodHealth = request.form.get('GoodHealth', default="Error")
+    Smoker = request.form.get('Smoker', default="Error")
+    SmokeADay = request.form.get('SmokeADay', default="Error")
+    Drinker = request.form.get('Drinker', default="Error")
+    Units = request.form.get('Units', default="Error")
+    Height = request.form.get('Height', default="Error")
+    Weight = request.form.get('Weight', default="Error")
+    HealthConditions = request.form.get('HealthConditions', default="Error")
+    HazardousPursuits = request.form.get('HazardousPursuits', default="Error")
+
+    conn = sqlite3.connect(DATABASE)
+    details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight, HealthConditions, HazardousPursuits)]
+    conn.executemany("INSERT INTO `Health`('GoodHealth', 'Smoker', 'SmokeADay',\
+                     'Drinker', 'Units', 'Height', 'Weight', 'HealthConditions', 'HazardousPursuits') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                     , details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return redirect(url_for('health'))
+
 
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
@@ -162,6 +184,7 @@ def AddDetails():
 def ClientAdd():
     return render_template('ClientData.html', msg='')
 
+
 @app.route("/AddClient")
 @login_required
 def customer():
@@ -198,7 +221,7 @@ def dependants():
     return render_template('people/dependants.html', msg='')
 
 
-@app.route("/Health")
+@app.route("/Health", methods=['GET'])
 @login_required
 def health():
     return render_template('people/health.html', msg='')
