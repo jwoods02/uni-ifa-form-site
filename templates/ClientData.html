@@ -35,14 +35,6 @@
 
 <script>
       function f1() {
-          var x = document.forms["myForm"]["Forname"].value;
-          if (x == "") {
-              alert("Name must be filled out");
-              return false;
-            }}
-</script>
-<script>
-      function f1() {
         var AccountID = document.forms["myForm"]["AccountID"].value;
         if (AccountID == "") {
             alert("AccountID must be filled out");
@@ -61,21 +53,22 @@
         var Password = document.forms["Password"]["eMail"].value;
         if (Password == "") {
             alert("Password must be filled out");
-        params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+ '&eMail=' +eMail+ '&Password=' +Password;
-        var xhttp = new XMLHttpRequest();
-        xhttp.open("POST", '/AddContact', true); // true is asynchronous
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.onload = function() {
-          if (xhttp.readyState === 4 && xhttp.status === 200) {
-            console.log(xhttp.responseText);
-            document.getElementById("txt").innerHTML = xhttp.responseText;
-          } else {
-            console.error(xhttp.statusText);
-          }
-        };
-        xhttp.send(params);
-        return false;
-      }}}}
+
+          params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+ '&eMail=' +eMail+ '&Password=' +Password;
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("POST", '/AddContact', true); // true is asynchronous
+          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhttp.onload = function() {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+              console.log(xhttp.responseText);
+              document.getElementById("txt").innerHTML = xhttp.responseText;
+            } else {
+              console.error(xhttp.statusText);
+            }
+          };
+          xhttp.send(params);
+          return false;
+        }}}}}}}
 
 
     </script>

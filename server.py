@@ -4,15 +4,10 @@ import uuid
 import hashlib
 from flask import Flask, redirect, url_for, request, render_template, session
 from functools import wraps
-
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-
 DATABASE = 'database.db'
-
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
 def login_required(f):
     @wraps(f)
@@ -24,8 +19,6 @@ def login_required(f):
         except KeyError:
             return redirect(url_for('login', next=request.url))
     return decorated_function
-
-
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
 def admin_required(f):
     @wraps(f)
@@ -34,28 +27,20 @@ def admin_required(f):
             return redirect(url_for('login', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
-
-
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hash_password(password):
     # uuid is used to generate a random number
     salt = uuid.uuid4().hex
     return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' \
            + salt
-
-
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hashed_password(hashed_password, user_password):
     password, salt = hashed_password.split(':')
     return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest() \
            + ":" + salt
-
-
 @app.route("/Login")
 def login():
     return render_template('login/login.html', msg='')
-
-
 @app.route("/CheckLogin", methods=['POST'])
 def checkLogin():
     print("Processing data")
@@ -78,14 +63,11 @@ def checkLogin():
                 return "/Client"
             else:
                 return "/Login"
-
-
 @app.route("/Logout")
 def logout():
     session['user'] = None
     session['admin'] = None
     return redirect(url_for('login'))
-
 @app.route("/HealthData", methods=['POST'])
 def HealthData():
     GoodHealth = request.form.get('GoodHealth', default="Error")
@@ -97,7 +79,6 @@ def HealthData():
     Weight = request.form.get('Weight', default="Error")
     HealthConditions = request.form.get('HealthConditions', default="Error")
     HazardousPursuits = request.form.get('HazardousPursuits', default="Error")
-
     conn = sqlite3.connect(DATABASE)
     details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight, HealthConditions, HazardousPursuits)]
     conn.executemany("INSERT INTO `Health`('GoodHealth', 'Smoker', 'SmokeADay',\
@@ -107,8 +88,6 @@ def HealthData():
     conn.close()
     msg = "Completed."
     return redirect(url_for('health'))
-
-
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
     ClientAccountID = request.form.get('ClientAccountID', default="Error")
@@ -118,7 +97,6 @@ def ClientAddDetails():
     Username = request.form.get('Username', default="Error")
     Password = request.form.get('Password', default="Error")
     Password = hash_password(Password)
-
     conn = sqlite3.connect(DATABASE)
     details = [(ClientAccountID, Forname, Surname, eMail, Username, Password)]
     conn.executemany("INSERT INTO `ClientAccounts`('ClientAccountID', 'Forname', 'Surname',\
@@ -128,8 +106,6 @@ def ClientAddDetails():
     conn.close()
     msg = "Completed."
     return msg
-
-
 @login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
@@ -159,7 +135,6 @@ def AddDetails():
     fax = request.form.get('fax', default="Error")
     mobile = request.form.get('mobile', default="Error")
     email = request.form.get('email', default="Error")
-
     conn = sqlite3.connect(DATABASE)
     details = [(title, firstname, initials, surname, prefers, age, gender, dob,
                maritalstatus, maidenname, retire, taxstatus, occupation,
@@ -179,80 +154,73 @@ def AddDetails():
     return msg
 
 
+@app.route("/DeleteClient", methods = ['GET','POST'])
+def delCustomer():
+    if request.method == 'GET':
+        return render_template('deleteClient.html')
+        if request.method == 'POST':
+            ID = request.form["ID"]
+            conn = sqlite3.connect(DATABASE)
+            details = [(ClientAccountID, Forname, Surname, eMail, Username, Password)]
+            conn.executemany("DELETE FROM TABLE `ClientAccounts`\
+                            WHERE ClientAccountID = ?", [(ID)])
+
+
+        conn.commit()
+        conn.close()
+        return render_template('deleteCustomer.html', msg = "User Deleted")
+
 @app.route("/Client/ClientAdd")
 @login_required
 def ClientAdd():
     return render_template('ClientData.html', msg='')
-
 @app.route("/AddClient")
 @login_required
 def customer():
     return render_template('clientdetail.html', msg='')
-
 @app.route("/Client")
 @login_required
 def clients():
     return render_template('people/clients.html', msg='')
-
-
 @app.route("/AddDetails")
 @login_required
 def details():
     return render_template('clientdetail.html', msg='')
-
-
 @app.route("/taxStatus")
 @login_required
 def taxStatus():
     return render_template('people/taxStatus.html', msg='')
-
-
 @app.route("/Occupation")
 @login_required
 def occupation():
     return render_template('people/occupation.html', msg='')
-
-
 @app.route("/Dependants")
 @login_required
 def dependants():
     return render_template('people/dependants.html', msg='')
-
-
 @app.route("/Health", methods=['GET'])
 @login_required
 def health():
     return render_template('people/health.html', msg='')
-
-
 @app.route("/Expenditure")
 @login_required
 def expenditure():
     return render_template('finances/expenditure.html', msg='')
-
-
 @app.route("/Income")
 @login_required
 def income():
     return render_template('finances/income.html', msg='')
-
-
 @app.route("/Liabilities")
 @login_required
 def liabilities():
     return render_template('finances/liabilities.html', msg='')
-
-
 @app.route("/Affordability")
 @login_required
 def affordability():
     return render_template('finances/affordability.html', msg='')
-
-
 @app.route("/Assets")
 @login_required
 def assets():
     return render_template('finances/assets.html', msg='')
-
 if __name__ == "__main__":
     app.run(debug=True)
