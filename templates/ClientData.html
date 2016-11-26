@@ -1,6 +1,4 @@
-{%extends 'blocks/nav.html'%}
-
-{%block mainBlock%}
+{%extends 'blocks/nav.html'%} {%block mainBlock%}
 <div class="container">
     <h2 class="page-header">Client Data</h2>
     <form id='myForm' action="/Client/ClientInsert" method="post">
@@ -32,7 +30,7 @@
     </form>
     <span id='txt'></span>
     <br>
-    <button class="btn btn-default"><a href=/AddClient>Back</button>
+    <button class="btn btn-default"><a href=/Client>Back</button>
 </div>
 
 <script>
@@ -46,23 +44,11 @@
 <script>
       function f1() {
         var AccountID = document.forms["myForm"]["AccountID"].value;
-        if (AccountID == "") {
-            alert("AccountID must be filled out");
         var Forname = document.forms["myForm"]["Forname"].value;
-        if (Forname == "") {
-            alert("Forname must be filled out");
         var Surname = document.forms["myForm"]["Surname"].value;
-        if (Surname == "") {
-            alert("Surname must be filled out");
         var eMail = document.forms["myForm"]["eMail"].value;
-        if (eMail == "") {
-            alert("Email must be filled out");
         var Username = document.forms["Username"]["eMail"].value;
-        if (Username == "") {
-            alert("Username must be filled out");
         var Password = document.forms["Password"]["eMail"].value;
-        if (Password == "") {
-            alert("Password must be filled out");
         params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+ '&eMail=' +eMail+ '&Password=' +Password;
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", '/AddContact', true); // true is asynchronous
