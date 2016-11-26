@@ -158,17 +158,14 @@ def AddDetails():
 def delCustomer():
     if request.method == 'GET':
         return render_template('deleteClient.html')
-        if request.method == 'POST':
-            ID = request.form["ID"]
-            conn = sqlite3.connect(DATABASE)
-            details = [(ClientAccountID, Forname, Surname, eMail, Username, Password)]
-            conn.executemany("DELETE FROM TABLE `ClientAccounts`\
-                            WHERE ClientAccountID = ?", [(ID)])
-
-
+    if request.method == 'POST':
+        ID_del = str(request.form["ID"])
+        conn = sqlite3.connect(DATABASE)
+        conn.execute("DELETE FROM `ClientAccounts`\
+                        WHERE ClientAccountID = ?", (ID_del,))
         conn.commit()
         conn.close()
-        return render_template('deleteCustomer.html', msg = "User Deleted")
+        return render_template('deleteClient.html', msg = "User Deleted")
 
 @app.route("/Client/ClientAdd")
 @login_required

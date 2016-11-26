@@ -1,5 +1,11 @@
 {%extends 'blocks/nav.html'%} {%block mainBlock%}
 
+<form method="POST" action="/DeleteClient">
+  ID:
+  <input type = "integer" name = "ID"><br>
+  <button type = "submit"> submit </button>
+</form>
+<span id='msg'> {{ msg }} </span>
 
 
 {%endblock%}
