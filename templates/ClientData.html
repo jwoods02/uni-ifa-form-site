@@ -1,43 +1,53 @@
 {%extends 'blocks/nav.html'%} {%block mainBlock%}
 <div class="container">
-    <h2 class="page-header">Client Data</h2>
-    <form id='myForm' action="/Client/ClientInsert" method="post">
-        <div class="form-group">
-            <label for="AccountID">AccountID</label>
-            <input type="integer" name="AccountID" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="Forname">Forname:</label>
+    <h2 class="page-header">Create New Client Account</h2>
+    <form class="form" id='myForm' action="/Client/ClientInsert" method="post">
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="Forname">First Name:</label>
             <input type="text" name="Forname" class="form-control">
+          </div>
         </div>
-        <div class="form-group">
+        <div class="col-xs-3">
+          <div class="form-group">
             <label for="Surname">Surname:</label>
             <input type="text" name="Surname" class="form-control">
+          </div>
         </div>
-        <div class="form-group">
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
             <label for="eMail">Email:</label>
             <input type="text" name="eMail" class="form-control">
+          </div>
         </div>
-        <div class="form-group">
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
             <label for="Username">Username:</label>
             <input type="text" name="Username" class="form-control">
+          </div>
         </div>
-        <div class="form-group">
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
             <label for="Password">Password:</label>
             <input type="text" name="Password" class="form-control">
+          </div>
         </div>
-        <button type="submit" onclick="f1()" class="btn btn-default">Submit</button>
+      </div>
+      <button type="submit" onclick="f1()" class="btn btn-default">Submit</button>
+      <button class="btn btn-default"><a href=/Client>Back</button>
     </form>
     <span id='txt'></span>
-    <br>
-    <button class="btn btn-default"><a href=/Client>Back</button>
 </div>
 
 <script>
       function f1() {
-        var AccountID = document.forms["myForm"]["AccountID"].value;
-        if (AccountID == "") {
-            alert("AccountID must be filled out");
         var Forname = document.forms["myForm"]["Forname"].value;
         if (Forname == "") {
             alert("Forname must be filled out");

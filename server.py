@@ -90,7 +90,6 @@ def HealthData():
     return redirect(url_for('health'))
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
-    ClientAccountID = request.form.get('ClientAccountID', default="Error")
     Forname = request.form.get('Forname', default="Error")
     Surname = request.form.get('Surname', default="Error")
     eMail = request.form.get('eMail', default="Error")
@@ -98,9 +97,9 @@ def ClientAddDetails():
     Password = request.form.get('Password', default="Error")
     Password = hash_password(Password)
     conn = sqlite3.connect(DATABASE)
-    details = [(ClientAccountID, Forname, Surname, eMail, Username, Password)]
-    conn.executemany("INSERT INTO `ClientAccounts`('ClientAccountID', 'Forname', 'Surname',\
-                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?, ?)"
+    details = [(Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `ClientAccounts`('Forname', 'Surname',\
+                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)"
                      , details)
     conn.commit()
     conn.close()
