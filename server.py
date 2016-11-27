@@ -131,7 +131,31 @@ def HealthData():
     msg = "Completed."
     return redirect(url_for('health'))
 
-
+@app.route("/DependantsData", methods=['POST'])
+def DependantsData():
+    Type = request.form.get('Type', default="Error")
+    Title = request.form.get('Title', default="Error")
+    FirstName = request.form.get('FirstName', default="Error")
+    Initials = request.form.get('Initials', default="Error")
+    LastName = request.form.get('LastName', default="Error")
+    KnownAs = request.form.get('KnownAs', default="Error")
+    Sex = request.form.get('Sex', default="Error")
+    DOB = request.form.get('DOB', default="Error")
+    Age = request.form.get('Age', default="Error")
+    Relationship = request.form.get('Relationship', default="Error")
+    FinanciallyDependent = request.form.get('FinanciallyDependent', default="Error")
+    Notes = request.form.get('Notes', default="Error")
+    conn = sqlite3.connect(DATABASE)
+    details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight, HealthConditions, HazardousPursuits)]
+    conn.executemany("INSERT INTO `Dependants`('Type', 'Title', 'FirstName',\
+                     'Initials', 'LastName', 'KnownAs', 'Sex', 'DOB',\
+                     'Age', 'Relationship', 'FinanciallyDependent', 'Notes') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                     , details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return redirect(url_for('dependants'))
+    
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
     Forname = request.form.get('Forname', default="Error")
