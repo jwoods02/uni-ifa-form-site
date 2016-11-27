@@ -8,6 +8,8 @@ app = Flask(__name__)
 app.secret_key = os.urandom(24)
 DATABASE = 'database.db'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
 def login_required(f):
     @wraps(f)
@@ -19,6 +21,8 @@ def login_required(f):
         except KeyError:
             return redirect(url_for('login', next=request.url))
     return decorated_function
+
+
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
 def admin_required(f):
     @wraps(f)
@@ -27,22 +31,30 @@ def admin_required(f):
             return redirect(url_for('login', next=request.url))
         return f(*args, **kwargs)
     return decorated_function
+
+
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hash_password(password):
     # uuid is used to generate a random number
     salt = uuid.uuid4().hex
-    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':' \
-           + salt
+    return hashlib.sha256(salt.encode() + password.encode()).hexdigest() + ':'\
+        + salt
+
+
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
 def hashed_password(hashed_password, user_password):
     password, salt = hashed_password.split(':')
-    return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest() \
-           + ":" + salt
+    return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()\
+        + ":" + salt
+
+
 @app.route("/Login")
 def login():
     return render_template('login/login.html', msg='')
-@app.route("/CheckLogin", methods=['POST'])
-def checkLogin():
+
+
+@app.route("/CheckClientLogin", methods=['POST'])
+def checkClientLogin():
     print("Processing data")
     if request.method == 'POST':
         username = request.form['username']
@@ -55,19 +67,47 @@ def checkLogin():
         actual_password = actual_password[0][0]
         if actual_password != "":
             password = hashed_password(actual_password, password)
-            cur.execute("SELECT * FROM ClientAccounts WHERE Username=? AND Password=?",
-                        (username, password))
+            cur.execute("SELECT * FROM ClientAccounts WHERE Username=? AND\
+            Password=?", (username, password))
             outcome = cur.fetchall()
             if len(outcome) > 0:
                 session['user'] = username
                 return "/Client"
             else:
                 return "/Login"
+
+
+@app.route("/CheckIFALogin", methods=['POST'])
+def checkIFALogin():
+    print("Processing data")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        conn = sqlite3.connect(DATABASE)
+        cur = conn.cursor()
+        cur.execute("SELECT Password FROM IFAAccounts WHERE Username=?",
+                    (username,))
+        actual_password = cur.fetchall()
+        actual_password = actual_password[0][0]
+        if actual_password != "":
+            password = hashed_password(actual_password, password)
+            cur.execute("SELECT * FROM IFAAccounts WHERE Username=? AND\
+            Password=?", (username, password))
+            outcome = cur.fetchall()
+            if len(outcome) > 0:
+                session['user'] = username
+                return "/Client"
+            else:
+                return "/Login"
+
+
 @app.route("/Logout")
 def logout():
     session['user'] = None
     session['admin'] = None
     return redirect(url_for('login'))
+
+
 @app.route("/HealthData", methods=['POST'])
 def HealthData():
     GoodHealth = request.form.get('GoodHealth', default="Error")
@@ -80,14 +120,18 @@ def HealthData():
     HealthConditions = request.form.get('HealthConditions', default="Error")
     HazardousPursuits = request.form.get('HazardousPursuits', default="Error")
     conn = sqlite3.connect(DATABASE)
-    details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight, HealthConditions, HazardousPursuits)]
+    details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight,
+                HealthConditions, HazardousPursuits)]
     conn.executemany("INSERT INTO `Health`('GoodHealth', 'Smoker', 'SmokeADay',\
-                     'Drinker', 'Units', 'Height', 'Weight', 'HealthConditions', 'HazardousPursuits') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                     , details)
+                     'Drinker', 'Units', 'Height', 'Weight',\
+                     'HealthConditions', 'HazardousPursuits') VALUES(?, ?, ?,\
+                     ?, ?, ?, ?, ?, ?)", details)
     conn.commit()
     conn.close()
     msg = "Completed."
     return redirect(url_for('health'))
+
+
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
     Forname = request.form.get('Forname', default="Error")
@@ -99,12 +143,14 @@ def ClientAddDetails():
     conn = sqlite3.connect(DATABASE)
     details = [(Forname, Surname, eMail, Username, Password)]
     conn.executemany("INSERT INTO `ClientAccounts`('Forname', 'Surname',\
-                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)"
-                     , details)
+                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)",
+                     details)
     conn.commit()
     conn.close()
     msg = "Completed."
     return msg
+
+
 @login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
@@ -139,8 +185,8 @@ def AddDetails():
                maritalstatus, maidenname, retire, taxstatus, occupation,
                religion, circumstances, address1, address2, address3, address4,
                postcode, town, country, phone, fax, mobile, email)]
-    conn.executemany("INSERT INTO `ClientDetails`('title', 'firstname', 'initials',\
-                     'surname', 'prefers', 'age', 'gender', 'dob',\
+    conn.executemany("INSERT INTO `ClientDetails`('title', 'firstname',\
+                     'initials', 'surname', 'prefers', 'age', 'gender', 'dob',\
                      'maritalstatus', 'maidenname', 'retire', 'taxstatus',\
                      'occupation', 'religion', 'circumstances', 'address1',\
                      'address2', 'address3', 'address4', 'postcode', 'town',\
@@ -153,7 +199,7 @@ def AddDetails():
     return msg
 
 
-@app.route("/DeleteClient", methods = ['GET','POST'])
+@app.route("/DeleteClient", methods=['GET', 'POST'])
 def delCustomer():
     if request.method == 'GET':
         return render_template('deleteClient.html')
@@ -164,56 +210,81 @@ def delCustomer():
                         WHERE ClientAccountID = ?", (ID_del,))
         conn.commit()
         conn.close()
-        return render_template('deleteClient.html', msg = "User Deleted")
+        return render_template('deleteClient.html', msg="User Deleted")
+
 
 @app.route("/Client/ClientAdd")
 @login_required
 def ClientAdd():
     return render_template('ClientData.html', msg='')
+
+
 @app.route("/AddClient")
 @login_required
 def customer():
     return render_template('clientdetail.html', msg='')
+
+
 @app.route("/Client")
 @login_required
 def clients():
     return render_template('people/clients.html', msg='')
+
+
 @app.route("/AddDetails")
 @login_required
 def details():
     return render_template('clientdetail.html', msg='')
+
+
 @app.route("/taxStatus")
 @login_required
 def taxStatus():
     return render_template('people/taxStatus.html', msg='')
+
+
 @app.route("/Occupation")
 @login_required
 def occupation():
     return render_template('people/occupation.html', msg='')
+
+
 @app.route("/Dependants")
 @login_required
 def dependants():
     return render_template('people/dependants.html', msg='')
+
+
 @app.route("/Health", methods=['GET'])
 @login_required
 def health():
     return render_template('people/health.html', msg='')
+
+
 @app.route("/Expenditure")
 @login_required
 def expenditure():
     return render_template('finances/expenditure.html', msg='')
+
+
 @app.route("/Income")
 @login_required
 def income():
     return render_template('finances/income.html', msg='')
+
+
 @app.route("/Liabilities")
 @login_required
 def liabilities():
     return render_template('finances/liabilities.html', msg='')
+
+
 @app.route("/Affordability")
 @login_required
 def affordability():
     return render_template('finances/affordability.html', msg='')
+
+
 @app.route("/Assets")
 @login_required
 def assets():

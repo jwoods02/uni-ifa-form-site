@@ -83,7 +83,7 @@
             var password = document.forms["ifaForm"]["password"].value;
             params = 'username=' + username + '&password=' + password;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
+            xhttp.open("POST", "/CheckIFALogin", true); // true is asynchronous
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.onload = function() {
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
@@ -101,7 +101,7 @@
             var password = document.forms["clientForm"]["password"].value;
             params = 'username=' + username + '&password=' + password;
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", '/CheckLogin', true); // true is asynchronous
+            xhttp.open("POST", '/CheckClientLogin', true); // true is asynchronous
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.onload = function() {
                 if (xhttp.readyState === 4 && xhttp.status === 200) {
