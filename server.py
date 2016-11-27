@@ -162,7 +162,7 @@ def AddDetails():
     age = request.form.get('age', default="Error")
     gender = request.form.get('gender', default="Error")
     dob = request.form.get('dob', default="Error")
-    maritalstatus = request.form.get('marital', default="Error")
+    maritalstatus = request.form.get('maritalstatus', default="Error")
     maidenname = request.form.get('maidenname', default="Error")
     retire = request.form.get('retire', default="Error")
     taxstatus = request.form.get('taxstatus', default="Error")

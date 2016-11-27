@@ -4,13 +4,12 @@
   <h2 class="page-header">Client Details</h2>
   <!--Adapted from http://www.w3schools.com/Bootstrap/bootstrap_collapse.asp-->
   <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#ClientForm">Hide/Show Primary Client Details </button><br>
-  <div id="ClientForm" class="collapse in">
-    <form id='myForm' action="/AddDetails" method="post">
+    <form id="ClientForm" class="collapse in" action="/AddDetails" method="post">
     <div class="row">
       <div class="col-xs-2">
         <div class="form-group">
           <label for="title">Title * :</label>
-          <select class="form-control input-sm">
+          <select name="title" class="form-control input-sm">
             <option value="null">Please Select</option>
             <option value="Mr">Mr</option>
             <option value="Mrs">Mrs</option>
@@ -55,7 +54,7 @@
       <div class="col-xs-2">
         <div class="form-group">
           <label for="gender">Gender * :</label><br>
-          <select class="form-control input-sm">
+          <select name="gender" class="form-control input-sm">
             <option value="null">Please Select</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
@@ -71,8 +70,8 @@
       </div>
       <div class="col-xs-2">
         <div class="form-group">
-          <label for="marital status">Marital Status * :</label>
-          <select class="form-control input-sm">
+          <label for="maritalstatus">Marital Status * :</label>
+          <select name="maritalstatus" class="form-control input-sm">
             <option value="null">Please Select</option>
             <option value="Married">Married</option>
             <option value="Widowed">Widowed</option>
@@ -109,7 +108,7 @@
       <div class="col-xs-2">
         <div class="form-group">
           <label for="religion">Religious Beliefs * :</label>
-          <select class="form-control input-sm">
+          <select name="religion" class="form-control input-sm">
             <option value="null">Please Select</option>
             <option value="Christianity">Christianity</option>
             <option value="Islam">Islam</option>
@@ -171,7 +170,7 @@
     <div class="col-xs-2">
       <div class="form-group">
         <label for="country">Country * :</label>
-        <select id="country" class="form-control input-sm">
+        <select name="country" class="form-control input-sm">
           <option selected value="United Kingdom">United Kingdom</option>
           <option value="Afghanistan">Afghanistan</option>
           <option value="Albania">Albania</option>
@@ -441,8 +440,7 @@
   <button type="submit" class="btn btn-default">Submit</button>
   <button class="btn btn-default"><a href=/Client>Back</button>
   </form>
-</div>
-    <span id='txt'></span>
+  <span id='txt'></span>
 </div>
 
 {%endblock%}
