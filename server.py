@@ -180,6 +180,25 @@ def ClientAddDetails():
     return msg
 
 
+@app.route("/Client/IFAInsert", methods=['POST'])
+def IFAAddDetails():
+    Forname = request.form.get('Forname', default="Error")
+    Surname = request.form.get('Surname', default="Error")
+    eMail = request.form.get('eMail', default="Error")
+    Username = request.form.get('Username', default="Error")
+    Password = request.form.get('Password', default="Error")
+    Password = hash_password(Password)
+    conn = sqlite3.connect(DATABASE)
+    details = [(Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `IFAAccounts`('Forname', 'Surname',\
+                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)",
+                     details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return msg
+
+
 @login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
@@ -263,6 +282,12 @@ def getData():
 @login_required
 def customer():
     return render_template('ClientData.html', msg='')
+
+
+@app.route("/Client/IFAAdd")
+@login_required
+def createIFA():
+    return render_template('CreateIFA.html', msg='')
 
 
 @app.route("/Client")
