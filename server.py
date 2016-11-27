@@ -131,6 +131,7 @@ def HealthData():
     msg = "Completed."
     return redirect(url_for('health'))
 
+
 @app.route("/DependantsData", methods=['POST'])
 def DependantsData():
     Type = request.form.get('Type', default="Error")
@@ -143,18 +144,22 @@ def DependantsData():
     DOB = request.form.get('DOB', default="Error")
     Age = request.form.get('Age', default="Error")
     Relationship = request.form.get('Relationship', default="Error")
-    FinanciallyDependent = request.form.get('FinanciallyDependent', default="Error")
+    FinanciallyDependent = request.form.get('FinanciallyDependent',
+                                            default="Error")
     Notes = request.form.get('Notes', default="Error")
     conn = sqlite3.connect(DATABASE)
-    details = [(Type, Title, FirstName, Initials, LastName, KnownAs, Sex, DOB, Age, Relationship, FinanciallyDependent, Notes)]
+    details = [(Type, Title, FirstName, Initials, LastName, KnownAs, Sex, DOB,
+                Age, Relationship, FinanciallyDependent, Notes)]
     conn.executemany("INSERT INTO `Dependants`('Type', 'Title', 'FirstName',\
                      'Initials', 'LastName', 'KnownAs', 'Sex', 'DOB',\
-                     'Age', 'Relationship', 'FinanciallyDependent', 'Notes') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                     , details)
+                     'Age', 'Relationship', 'FinanciallyDependent', 'Notes')\
+                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                     details)
     conn.commit()
     conn.close()
     msg = "Completed."
     return redirect(url_for('dependants'))
+
 
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
@@ -236,25 +241,28 @@ def delCustomer():
         conn.close()
         return render_template('deleteClient.html', msg="User Deleted")
 
+
 @app.route("/ViewClient")
 # @login_required
 def list():
     msg = getData()
-    return render_template('clients.html', msg = msg)
+    return render_template('clients.html', msg=msg)
+
 
 def getData():
     msg = []
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute('SELECT * FROM ClientAccounts')
-    msg.append( c.fetchall()  )
+    msg.append(c.fetchall())
     print(msg)
     return msg
 
-@app.route("/AddClient")
+
+@app.route("/Client/ClientAdd")
 @login_required
 def customer():
-    return render_template('clientdetail.html', msg='')
+    return render_template('ClientData.html', msg='')
 
 
 @app.route("/Client")
