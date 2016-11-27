@@ -213,9 +213,19 @@ def delCustomer():
         return render_template('deleteClient.html', msg="User Deleted")
 
 @app.route("/ViewClient")
-@login_required
-def newdetails():
-    return render_template('viewClient.html', msg='')
+# @login_required
+def list():
+    msg = getData()
+    return render_template('clients.html', msg = msg)
+
+def getData():
+    msg = []
+    conn = sqlite3.connect(DATABASE)
+    c = conn.cursor()
+    c.execute('SELECT * FROM ClientAccounts')
+    msg.append( c.fetchall()  )
+    print(msg)
+    return msg
 
 @app.route("/AddClient")
 @login_required
@@ -224,9 +234,9 @@ def customer():
 
 
 @app.route("/Client")
-@login_required
+# @login_required
 def clients():
-    return render_template('people/clients.html', msg='')
+    return render_template('clients.html', msg='')
 
 
 @app.route("/AddDetails")
