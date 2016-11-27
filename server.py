@@ -212,12 +212,10 @@ def delCustomer():
         conn.close()
         return render_template('deleteClient.html', msg="User Deleted")
 
-
-@app.route("/Client/ClientAdd")
+@app.route("/UpdateClient")
 @login_required
-def ClientAdd():
-    return render_template('ClientData.html', msg='')
-
+def newdetails():
+    return render_template('clientUpdate.html', msg='')
 
 @app.route("/AddClient")
 @login_required
