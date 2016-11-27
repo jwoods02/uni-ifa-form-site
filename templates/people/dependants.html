@@ -1,4 +1,107 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Dependants </h1>
+<div class="container">
+    <h2 class="page-header">Dependants</h2>
+    <form id='myForm' action="/DependantsData" method="post">
+		<div class="row">       
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="Type">Type:</label>
+					<select name="Type"class="form-control input-sm">
+						<option value="null">Please Select</option>
+						<option value="Children">Children</option>
+						<option value="GrandChildren">Grand Children</option>
+                        <option value="Parents">Parents</option>
+                        <option value="Other">Other</option>
+					</select>
+				</div>
+			</div>	
+            <div class="col-xs-2">
+				<div class="form-group">
+					<label for="Title">Title:</label>
+					<select name="Title"class="form-control input-sm">
+						<option value="null">Please Select</option>
+						<option value="Mr">Mr.</option>
+						<option value="Mrs">Mrs.</option>
+                        <option value="Miss">Miss.</option>
+                        <option value="Master">Mstr.</option>
+                        <option value="Other">Other</option>
+					</select>
+				</div>
+			</div>	
+			<div class="col-xs-3">
+				<div class="form-group" >
+					<label for="FirstName">FirstName:</label>
+					<input type="text" name="FirstName" class="form-control">
+				</div>
+			</div>	
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="Initials">Initials</label>
+					<input type="text" name="Initials" class="form-control">
+				</div>
+			</div>
+            <div class="col-xs-3">
+				<div class="form-group" >
+					<label for="LastName">LastName:</label>
+					<input type="text" name="LastName" class="form-control">
+				</div>
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="KnownAs">Known As:</label>
+					<input type="text" name="KnownAs" class="form-control">
+				</div>
+			</div>
+            <div class="col-xs-2">
+				<div class="form-group">
+					<label for="Sex">Sex:</label>
+					<select name="Sex"class="form-control input-sm">
+						<option value="null">Please Select</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+                        <option value="Other">Other</option>
+					</select>
+				</div>
+			</div>    
+			<div class="col-xs-2">
+				<div class="form-group">
+					<label for="DOB">Date Of Birth:</label>
+					<input type="integer" name="DOB" class="form-control" placeholder="DD/MM/YY">
+				</div>
+			</div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="Age">Age:</label>
+                    <input type="integer" name="Age" class="form-control">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="Relationship">Relationship:</label>
+                    <input type="text" name="Relationship" class="form-control">
+                </div>
+            </div>
+            <div class="col-xs-2">
+                <div class="form-group">
+                    <label for="FinanciallyDependent">Financially Dependent:</label>
+                    <input type="text" name="FinanciallyDependent" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Notes">Notes:</label>
+                    <input type="text" name="Notes" class="form-control">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <span id='txt'></span>
+    
+</div>
 {%endblock%}
