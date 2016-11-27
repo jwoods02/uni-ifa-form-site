@@ -146,7 +146,7 @@ def DependantsData():
     FinanciallyDependent = request.form.get('FinanciallyDependent', default="Error")
     Notes = request.form.get('Notes', default="Error")
     conn = sqlite3.connect(DATABASE)
-    details = [(GoodHealth, Smoker, SmokeADay, Drinker, Units, Height, Weight, HealthConditions, HazardousPursuits)]
+    details = [(Type, Title, FirstName, Initials, LastName, KnownAs, Sex, DOB, Age, Relationship, FinanciallyDependent, Notes)]
     conn.executemany("INSERT INTO `Dependants`('Type', 'Title', 'FirstName',\
                      'Initials', 'LastName', 'KnownAs', 'Sex', 'DOB',\
                      'Age', 'Relationship', 'FinanciallyDependent', 'Notes') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
