@@ -49,17 +49,17 @@
       <div class="col-xs-1">
         <div class="form-group">
           <label for="age">Age * :</label>
-          <input type="text" name="age" class="form-control input-sm">
+          <input type="integer" name="age" class="form-control input-sm">
         </div>
       </div>
       <div class="col-xs-2">
         <div class="form-group">
           <label for="gender">Gender * :</label><br>
           <select class="form-control input-sm">
-            <option>Please Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
+            <option value="null">Please Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
           </select>
         </div>
       </div>
@@ -438,8 +438,8 @@
       </div>
     </div>
   </div>
-      <button type="submit" class="btn btn-default">Submit</button>
-      <button class="btn btn-default"><a href=/Client>Back</button>
+  <button type="submit" class="btn btn-default">Submit</button>
+  <button class="btn btn-default"><a href=/Client>Back</button>
   </form>
 </div>
     <span id='txt'></span>
