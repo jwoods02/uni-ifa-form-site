@@ -155,7 +155,7 @@ def DependantsData():
     conn.close()
     msg = "Completed."
     return redirect(url_for('dependants'))
-    
+
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
     Forname = request.form.get('Forname', default="Error")
