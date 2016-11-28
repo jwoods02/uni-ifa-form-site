@@ -1,18 +1,18 @@
 {%extends 'blocks/nav.html'%} {%block mainBlock%}
 <div class="container">
     <h2 class="page-header">Create New Client Account</h2>
-    <form class="form" id='myForm' action="/Client/ClientInsert" method="post">
+    <form class="form" id='myForm' action="/Client/ClientInsert" method="POST">
       <div class="row">
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Forname">First Name:</label>
-            <input type="text" name="Forname" class="form-control">
+            <input type="text" name="Forname" class="form-control" required="true">
           </div>
         </div>
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Surname">Surname:</label>
-            <input type="text" name="Surname" class="form-control">
+            <input type="text" name="Surname" class="form-control" required="true">
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
         <div class="col-xs-4">
           <div class="form-group">
             <label for="eMail">Email:</label>
-            <input type="text" name="eMail" class="form-control">
+            <input type="email" name="eMail" class="form-control" required="true">
           </div>
         </div>
       </div>
@@ -28,7 +28,7 @@
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Username">Username:</label>
-            <input type="text" name="Username" class="form-control">
+            <input type="text" name="Username" class="form-control" required="true">
           </div>
         </div>
       </div>
@@ -36,50 +36,15 @@
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Password">Password:</label>
-            <input type="text" name="Password" class="form-control">
+            <input type="text" name="Password" class="form-control" required="true">
           </div>
         </div>
       </div>
-      <button type="submit" onclick="f1()" class="btn btn-default">Submit</button>
+      <button type="submit" class="btn btn-default">Submit</button>
       <button class="btn btn-default"><a href=/Client>Back</button>
     </form>
     <span id='txt'></span>
 </div>
 
-<script>
-      function f1() {
-        var Forname = document.forms["myForm"]["Forname"].value;
-        if (Forname == "") {
-            alert("Forname must be filled out");
-        var Surname = document.forms["myForm"]["Surname"].value;
-        if (Surname == "") {
-            alert("Surname must be filled out");
-        var eMail = document.forms["myForm"]["eMail"].value;
-        if (eMail == "") {
-            alert("Email must be filled out");
-        var Username = document.forms["Username"]["eMail"].value;
-        if (Username == "") {
-            alert("Username must be filled out");
-        var Password = document.forms["Password"]["eMail"].value;
-        if (Password == "") {
-            alert("Password must be filled out");
 
-          params = 'AccountID='+AccountID+'&Forname='+Forname+'&Surname='+Surname+ '&eMail=' +eMail+ '&Password=' +Password;
-          var xhttp = new XMLHttpRequest();
-          xhttp.open("POST", '/AddContact', true); // true is asynchronous
-          xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhttp.onload = function() {
-            if (xhttp.readyState === 4 && xhttp.status === 200) {
-              console.log(xhttp.responseText);
-              document.getElementById("txt").innerHTML = xhttp.responseText;
-            } else {
-              console.error(xhttp.statusText);
-            }
-          };
-          xhttp.send(params);
-          return false;
-        }}}}}}}
-
-
-    </script>
 {%endblock%}

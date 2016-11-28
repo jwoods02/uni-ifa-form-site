@@ -263,6 +263,11 @@ def clients():
     return render_template('clients.html', msg='')
 
 
+@app.route("/Client/ClientAdd")
+def newaccount():
+    return render_template('ClientData.html', msg='')
+
+
 @app.route("/AddDetails")
 @login_required
 def details():
