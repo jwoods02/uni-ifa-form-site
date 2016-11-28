@@ -131,6 +131,7 @@ def HealthData():
     msg = "Completed."
     return redirect(url_for('health'))
 
+
 @app.route("/DependantsData", methods=['POST'])
 def DependantsData():
     Type = request.form.get('Type', default="Error")
@@ -143,18 +144,22 @@ def DependantsData():
     DOB = request.form.get('DOB', default="Error")
     Age = request.form.get('Age', default="Error")
     Relationship = request.form.get('Relationship', default="Error")
-    FinanciallyDependent = request.form.get('FinanciallyDependent', default="Error")
+    FinanciallyDependent = request.form.get('FinanciallyDependent',
+                                            default="Error")
     Notes = request.form.get('Notes', default="Error")
     conn = sqlite3.connect(DATABASE)
-    details = [(Type, Title, FirstName, Initials, LastName, KnownAs, Sex, DOB, Age, Relationship, FinanciallyDependent, Notes)]
+    details = [(Type, Title, FirstName, Initials, LastName, KnownAs, Sex, DOB,
+                Age, Relationship, FinanciallyDependent, Notes)]
     conn.executemany("INSERT INTO `Dependants`('Type', 'Title', 'FirstName',\
                      'Initials', 'LastName', 'KnownAs', 'Sex', 'DOB',\
-                     'Age', 'Relationship', 'FinanciallyDependent', 'Notes') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-                     , details)
+                     'Age', 'Relationship', 'FinanciallyDependent', 'Notes')\
+                     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                     details)
     conn.commit()
     conn.close()
     msg = "Completed."
     return redirect(url_for('dependants'))
+
 
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
@@ -167,6 +172,25 @@ def ClientAddDetails():
     conn = sqlite3.connect(DATABASE)
     details = [(Forname, Surname, eMail, Username, Password)]
     conn.executemany("INSERT INTO `ClientAccounts`('Forname', 'Surname',\
+                     'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)",
+                     details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return msg
+
+
+@app.route("/Client/IFAInsert", methods=['POST'])
+def IFAAddDetails():
+    Forname = request.form.get('Forname', default="Error")
+    Surname = request.form.get('Surname', default="Error")
+    eMail = request.form.get('eMail', default="Error")
+    Username = request.form.get('Username', default="Error")
+    Password = request.form.get('Password', default="Error")
+    Password = hash_password(Password)
+    conn = sqlite3.connect(DATABASE)
+    details = [(Forname, Surname, eMail, Username, Password)]
+    conn.executemany("INSERT INTO `IFAAccounts`('Forname', 'Surname',\
                      'eMail', 'Username', 'Password') VALUES(?, ?, ?, ?, ?)",
                      details)
     conn.commit()
@@ -236,25 +260,34 @@ def delCustomer():
         conn.close()
         return render_template('deleteClient.html', msg="User Deleted")
 
+
 @app.route("/ViewClient")
 # @login_required
 def list():
     msg = getData()
-    return render_template('clients.html', msg = msg)
+    return render_template('clients.html', msg=msg)
+
 
 def getData():
     msg = []
     conn = sqlite3.connect(DATABASE)
     c = conn.cursor()
     c.execute('SELECT * FROM ClientAccounts')
-    msg.append( c.fetchall()  )
+    msg.append(c.fetchall())
     print(msg)
     return msg
 
-@app.route("/AddClient")
+
+@app.route("/Client/ClientAdd")
 @login_required
 def customer():
-    return render_template('clientdetail.html', msg='')
+    return render_template('ClientData.html', msg='')
+
+
+@app.route("/Client/IFAAdd")
+@login_required
+def createIFA():
+    return render_template('CreateIFA.html', msg='')
 
 
 @app.route("/Client")
