@@ -261,6 +261,12 @@ def delCustomer():
         return render_template('deleteClient.html', msg="User Deleted")
 
 
+@app.route("/UpdateClient")
+@login_required
+def update():
+    return render_template('update.html', msg='')
+
+
 @app.route("/ViewClient")
 # @login_required
 def list():
