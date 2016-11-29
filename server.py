@@ -262,10 +262,11 @@ def delCustomer():
 
 
 @app.route("/ViewClient")
-# @login_required
+@login_required
 def list():
-    msg = getData()
-    return render_template('clients.html', msg=msg)
+    client_list = getData()
+    headings = ["ID", "Forname", "Surname", "E-Mail", "Username", "Password"]
+    return render_template('clientlist.html', msg=client_list)
 
 
 def getData():
@@ -274,7 +275,7 @@ def getData():
     c = conn.cursor()
     c.execute('SELECT * FROM ClientAccounts')
     msg.append(c.fetchall())
-    print(msg)
+    msg = msg[0]
     return msg
 
 
