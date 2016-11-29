@@ -1,0 +1,25 @@
+{%extends 'blocks/nav.html'%}
+{%block mainBlock%}
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Forname</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+        </tr>
+
+        {% for person in msg %}
+            <tr>
+                {% for col in person %}
+                <td>
+                    {{col}}
+                </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{%endblock%}
