@@ -1,4 +1,87 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Expenditures </h1>
+<div class="container">
+    <h2 class="page-header">Expenditure</h2>
+    <form action="/ExpenditureData" method="post">
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Property">Property:</label>
+                    <input type="integer" name="Property" class="form-control input-sm">
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Housekeeping">Housekeeping:</label>
+                    <input type="integer" name="Housekeeping" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Transport">Transport:</label>
+                    <input type="integer" name="Transport" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Dependants">Dependants:</label>
+                     <input type="integer" name="Dependants" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Pets">Pets:</label>
+                    <input type="integer" name="Pets" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="ProffesionalFees">Proffesional Fees:</label>
+                    <input type="integer" name="ProffesionalFees" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="CostOfBorrowing">Cost of borowing:</label>
+                    <input type="integer" name="CostOfBorrowing" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="RegularSavings">Regualar Savings:</label>
+                    <input type="integer" name="RegularSavings" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="ProtectionPolicies">Protection Policies:</label>
+                    <input type="integer" name="ProtectionPolicies" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Other">Other:</label>
+                    <input type="integer" name="Other" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
 {%endblock%}

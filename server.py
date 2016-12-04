@@ -368,7 +368,7 @@ def AffordabilityData():
     CommittedSpending = request.form.get('CommittedSpending', default="Error")
     DiscretionarySpending = request.form.get('DiscretionarySpending', default="Error")
     SpendingSurplus = request.form.get('SpendingSurplus', default="Error")
-    
+
     conn = sqlite3.connect(DATABASE)
     details = [(TaxActual, TaxCalculated, CommittedSpending, DiscretionarySpending, SpendingSurplus)]
     conn.executemany("INSERT INTO `Affordability`('TaxActual', 'TaxCalculated',\
@@ -377,7 +377,8 @@ def AffordabilityData():
     conn.commit()
     conn.close()
     msg = "Completed."
-    return redirect(url_for('affordability'))    
+    return redirect(url_for('affordability'))
+
 
 @app.route("/Assets")
 @login_required
