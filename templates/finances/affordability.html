@@ -1,4 +1,58 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Affordability </h1>
+<div class="container">
+    <h2 class="page-header">Affordability</h2>
+    <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#AffordabilityIncomeForm">Hide/Show Income (GROSS) </button><br>
+    <form id="AffordabilityIncomeForm" class="collapse" action="/AffordabilityData" method="post">
+     <div class="col-xs-6">
+        <div class="form-group">
+          <label for="TaxActual">Income Tax & NI (actual):</label>
+          <input type="integer" name="TaxActual" class="form-control input-sm">
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group">
+          <label for="TaxCalculated">Income Tax & NI (calculated):</label>
+          <input type="integer" name="TaxCalculated" class="form-control input-sm">
+        </div>
+      </div>  
+    </form>
+    <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#AffordabilityCommittedSpendingForm">Hide/Show Committed Spending </button><br>
+    <form id="AffordabilityCommittedSpendingForm" class="collapse" action="/AffordabilityData" method="post">
+     <div class="col-xs-12">
+        <div class="form-group">
+          <label for="CommittedSpending">Committed Spending:</label>
+          <input type="integer" name="CommittedSpending" class="form-control input-sm">
+        </div>
+      </div>
+    </form> 
+    <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#AffordabilityDiscretionarySpendingForm">Hide/Show Discretionary Spending </button><br>
+    <form id="AffordabilityDiscretionarySpendingForm" class="collapse" action="/AffordabilityData" method="post">
+     <div class="col-xs-12">
+        <div class="form-group">
+          <label for="DiscretionarySpending">Discretionary Spending:</label>
+          <input type="integer" name="DiscretionarySpending" class="form-control input-sm">
+        </div>
+      </div>
+    </form> 
+    <button type="button" class="btn btn-info btn-block" data-toggle="collapse" data-target="#AffordabilitySpendingForm">Hide/Show Affordability/Spending Surplus </button><br>
+    <form id="AffordabilitySpendingForm" class="collapse" action="/AffordabilityData" method="post">
+     <div class="col-xs-12">
+        <div class="form-group">
+          <label for="SpendingSurplus">Affordability/Spending Surplus:</label>
+          <input type="integer" name="SpendingSurplus" class="form-control input-sm">
+        </div>
+      </div>
+      <button type="submit" id="submit" onclick="submitForms" class="btn btn-default">Submit</button>
+    </form> 
+</div>  
+<script>
+   submitForms = function(){
+    document.getElementById("AffordabilityIncomeForm").submit();
+    document.getElementById("AffordabilityCommittedSpendingForm").submit();
+    document.getElementById("AffordabilityDiscretionarySpendingForm").submit();
+    document.getElementById("AffordabilitySpendingForm").submit();
+}
+} 
+</script>  
 {%endblock%}
