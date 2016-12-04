@@ -344,6 +344,11 @@ def expenditure():
     return render_template('finances/expenditure.html', msg='')
 
 
+@app.route("/ExpenditureData", methods=['POST'])
+def ExpenditureData():
+    return("me")
+
+
 @app.route("/Income")
 @login_required
 def income():
