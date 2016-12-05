@@ -1,9 +1,15 @@
+<!-- This is the extension of the template navbar -->
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
+<!-- This is a container which is bneing used for postioning -->
 <div class="container">
+    <!-- This is the page title -->
     <h2 class="page-header">Health</h2>
+    <!-- This is the form for data entry and it is using an AppRoute on the server to send the data to the database via a post method -->
     <form id='myForm' action="/HealthData" method="post">
-		<div class="row">       
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
+		<div class="row">
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="GoodHealth">Good Health?:</label>
@@ -13,7 +19,8 @@
 						<option value="No">No</option>
 					</select>
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
 			<div class="col-xs-2">
 				<div class="form-group">
                     <label for="Smoker">Do you Smoke?:</label>
@@ -23,13 +30,15 @@
 						<option value="No">No</option>
 					</select>
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-3">
 				<div class="form-group" >
 					<label for="SmokeADay">How many a day?:</label>
 					<input type="integer" name="SmokeADay" class="form-control">
 				</div>
 			</div>
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
 			<div class="col-xs-2">	
 				<div class="form-group">
 					<label for="Drinker">Do you Drink?:</label>
@@ -39,43 +48,48 @@
 						<option value="No">No</option>
 					</select>
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-3">
 				<div class="form-group">
 					<label for="Units">How many Units a week?:</label>
 					<input type="integer" name="Units" class="form-control">
 				</div>
 			</div>
-		</div>		
+		</div>
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
 		<div class="row">
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="Height">Height:</label>
 					<input type="integer" name="Height" class="form-control" placeholder="Centimeters">
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="Weight">Weight:</label>
 					<input type="integer" name="Weight" class="form-control" placeholder="Kilograms">
 				</div>
 			</div>
+            <!-- This is a block that consists of a label and input -->
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="HealthConditions">Health Conditions?:</label>
                     <input type="text" name="HealthConditions" class="form-control">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="HazardousPursuits">Hazardous Pursuits ?:</label>
                     <input type="text" name="HazardousPursuits" class="form-control">
                 </div>
             </div>
-        </div>        
+        </div>
+        <!-- This is the button that the user will click to submit the form to the server and then onto the database -->        
         <button type="submit" class="btn btn-default">Submit</button>
-    </form>
-    <span id='txt'></span>
-    
+    </form>    
 </div>
 {%endblock%}

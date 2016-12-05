@@ -3,6 +3,7 @@
 
 <head>
     <title> IFA Client Project </title>
+    <!-- These are links and scripts for bootstrap -->
     <link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -10,9 +11,11 @@
 </head>
 
 <body>
+    <!-- this section of code is for the navbar -->
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
+                <!-- This is where the dropdown for the People sections of the website -->
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">People <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/Client">Clients</a></li>
@@ -22,6 +25,7 @@
                         <li><a href="/Dependants">Dependants</a></li>
                     </ul>
                 </li>
+                <!-- This is where the dropdown for the Finance sections of the website -->
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Finances <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="/Income">Income</a></li>
@@ -31,16 +35,19 @@
                         <li><a href="/Affordability">Affordability</a></li>
                     </ul>
                 </li>
+                <!-- These are placeholders for other pages for the website-->
                 <li><a href="#">Life Goals</a></li>
                 <li><a href="#">Advice Areas</a></li>
                 <li><a href="#">Cashflow</a></li>
                 <li><a href="#">Reports</a></li>
             </ul>
+            <!-- This is the code for the right side of the nav and this is where logout button is placed-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
+    <!-- This is where all of the content for the other pages will go as they will be extending this template -->
     <article>
         {% block mainBlock%}Page under construction. {%endblock%}
     </article>

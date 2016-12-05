@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- This is the links and scripts for bootstrap -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,12 +10,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Login</title>
 </head>
+<!-- This is some css styling for this page only -->
 <style>
     .center {
         text-align: center;
     }
 </style>
 <body>
+    <!-- This gives the user two buttons to clieck dpending on if they are a client or and IFA and then will take them to the correct login screen -->
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -32,6 +34,7 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane" id="ifa">
                     <h1 class="page-header center"> IFA Login </h1>
+                    <!-- This is the IFA login screen after you click the IFA button-->
                     <form id="ifaForm" method="POST" onsubmit="return checkIFALogin()">
                         <div class="modal-dialog">
                             <div class="modal-body">
@@ -50,9 +53,10 @@
                         </div>
                     </form>
                 </div>
-
+                <!-- Tab panes -->   
                 <div role="tabpanel" class="tab-pane" id="client">
                     <h1 class="page-header center"> Client Login </h1>
+                    <!-- This is the client login screen after you click the client button-->
                     <form id="clientForm" method="POST" onsubmit="return checkClientLogin()">
                         <div class="modal-dialog">
                             <div class="modal-body">
@@ -78,6 +82,7 @@
     </div>
 
     <script>
+        <!-- This function checks the Login using Ajax by using an AppRoute in the server that checks the database to see if a user exists before allowing them to log in -->
         function checkIFALogin() {
             var username = document.forms["ifaForm"]["username"].value;
             var password = document.forms["ifaForm"]["password"].value;
@@ -95,7 +100,7 @@
             xhttp.send(params);
             return false;
         };
-
+        <!-- This function checks the Login using Ajax by using an AppRoute in the server that checks the database to see if a user exists before allowing them to log in -->
         function checkClientLogin() {
             var username = document.forms["clientForm"]["username"].value;
             var password = document.forms["clientForm"]["password"].value;

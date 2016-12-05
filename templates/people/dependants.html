@@ -1,9 +1,15 @@
+<!-- This is the extension of the template navbar -->
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
+<!-- This is a container which is bneing used for postioning -->
 <div class="container">
+    <!-- This is the page title -->
     <h2 class="page-header">Dependants</h2>
+    <!-- This is the form for data entry and it is using an AppRoute on the server to send the data to the database via a post method -->
     <form id='myForm' action="/DependantsData" method="post">
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
 		<div class="row">       
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="Type">Type:</label>
@@ -15,7 +21,8 @@
                         <option value="Other">Other</option>
 					</select>
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
             <div class="col-xs-2">
 				<div class="form-group">
 					<label for="Title">Title:</label>
@@ -28,26 +35,30 @@
                         <option value="Other">Other</option>
 					</select>
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-3">
 				<div class="form-group" >
 					<label for="FirstName">FirstName:</label>
 					<input type="text" name="FirstName" class="form-control">
 				</div>
-			</div>	
+			</div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="Initials">Initials</label>
 					<input type="text" name="Initials" class="form-control">
 				</div>
 			</div>
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-3">
 				<div class="form-group" >
 					<label for="LastName">LastName:</label>
 					<input type="text" name="LastName" class="form-control">
 				</div>
 			</div>
-		</div>		
+		</div>	
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
 		<div class="row">
 			<div class="col-xs-2">
 				<div class="form-group">
@@ -55,6 +66,7 @@
 					<input type="text" name="KnownAs" class="form-control">
 				</div>
 			</div>
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
             <div class="col-xs-2">
 				<div class="form-group">
 					<label for="Sex">Sex:</label>
@@ -65,25 +77,29 @@
                         <option value="Other">Other</option>
 					</select>
 				</div>
-			</div>    
+			</div>
+            <!-- This is a block that consists of a label and input -->            
 			<div class="col-xs-2">
 				<div class="form-group">
 					<label for="DOB">Date Of Birth:</label>
 					<input type="integer" name="DOB" class="form-control" placeholder="DD/MM/YY">
 				</div>
 			</div>
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-2">
                 <div class="form-group">
                     <label for="Age">Age:</label>
                     <input type="integer" name="Age" class="form-control">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-2">
                 <div class="form-group">
                     <label for="Relationship">Relationship:</label>
                     <input type="text" name="Relationship" class="form-control">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and select which gives the user options on what can be entered -->
             <div class="col-xs-2">
                 <div class="form-group">
                     <label for="FinanciallyDependent">Financially Dependent:</label>
@@ -95,7 +111,9 @@
                 </div>
             </div>
         </div>
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
         <div class="row">
+            <!-- This is a block that consists of a label and input -->
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="Notes">Notes:</label>
@@ -103,6 +121,7 @@
                 </div>
             </div>
         </div>
+        <!-- This is the button that the user will click to submit the form to the server and then onto the database -->
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
     <span id='txt'></span>

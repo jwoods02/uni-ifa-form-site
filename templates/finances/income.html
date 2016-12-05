@@ -1,21 +1,29 @@
+<!-- This is the extension of the template navbar -->
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
+<!-- This is a container which is bneing used for postioning -->
 <div class="container">
+    <!-- This is the page title -->
     <h2 class="page-header">Income</h2>
+    <!-- This is the form for data entry and it is using an AppRoute on the server to send the data to the database via a post method -->
     <form action="/IncomeData" method="post">
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
         <div class="row">
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="Employment">Employment:</label>
                     <input type="integer" name="Employment" class="form-control input-sm">
                 </div>
             </div>    
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="SelfEmployment">Self-Employment:</label>
                     <input type="integer" name="SelfEmployment" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-4">
                 <div class="form-group">
                     <label for="Pensions">Pensions:</label>
@@ -23,19 +31,23 @@
                 </div>
             </div>			
         </div>
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
         <div class="row">
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="InterestOnSavings">Interest on Savings:</label>
                     <input type="integer" name="InterestOnSavings" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-4">
                 <div class="form-group">
                     <label for="InvestmentIncome">Investment Income:</label>
                     <input type="integer" name="InvestmentIncome" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-4">
                 <div class="form-group">
                     <label for="RentalIncome">Rental Income:</label>
@@ -43,19 +55,23 @@
                 </div>
             </div>
         </div>
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
         <div class="row">
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-4">
                 <div class="form-group">
                     <label for="CapitalDisposals">Capital Disposals:</label>
                     <input type="integer" name="CapitalDisposals" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-4">
                 <div class="form-group">
                     <label for="Maintenance">Maintenance:</label>
                     <input type="integer" name="Maintenance" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-4">
                 <div class="form-group">
                     <label for="Insurance">Insurance:</label>
@@ -63,20 +79,24 @@
                 </div>
             </div>
         </div>
+        <!-- This is a row tag which is also used for positioning because rows in Bootstrap are limited to 12 blocks across-->
         <div class="row">
+            <!-- This is a block that consists of a label and input -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="StateBenefit">State Benefit:</label>
                     <input type="integer" name="StateBenefit" class="form-control input-sm">
                 </div>
             </div>
+            <!-- This is a block that consists of a label and input -->
 			<div class="col-xs-6">
                 <div class="form-group">
                     <label for="Other">Other:</label>
                     <input type="integer" name="Other" class="form-control input-sm">
                 </div>
             </div>
-        </div> 
+        </div>
+        <!-- This is the button that the user will click to submit the form to the server and then onto the database -->
         <button type="submit" class="btn btn-default">Submit</button>
     </form>    
 </div> 
