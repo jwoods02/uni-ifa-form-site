@@ -195,6 +195,15 @@ $( ".fa" ).click(function() {
      $("#savings-total").val(sum);
 });
 
+$( "#investments-dropdown input" ).change(function() {
+    var sum = 0;
+    // http://stackoverflow.com/questions/2417553/jquery-calculate-sum-of-values-in-all-text-fields
+    $( "#investments-dropdown input" ).each(function() {
+        sum += Number($(this).val());
+    });
+    $("#investments-total").val(sum);
+});
+
 
 </script>
 
