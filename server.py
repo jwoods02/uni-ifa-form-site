@@ -199,7 +199,7 @@ def ClientAddDetails():
     msg = "Completed."
     return msg
 
-
+# Adds a new IFA account to the database
 @app.route("/Client/IFAInsert", methods=['POST'])
 def IFAAddDetails():
     Forname = request.form.get('Forname', default="Error")
@@ -218,7 +218,7 @@ def IFAAddDetails():
     msg = "Completed."
     return msg
 
-
+# Add personal details for a client to the database.
 @login_required
 @app.route("/AddDetails", methods=['POST'])
 def AddDetails():
