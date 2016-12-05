@@ -11,6 +11,9 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
+# This function is a Python decorator which checks the user is logged in
+# Using the session object. If signed in the user gets taken to the page
+# Else the user is taken to the login page
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -24,16 +27,22 @@ def login_required(f):
 
 
 # Adapted from http://flask.pocoo.org/docs/0.11/patterns/viewdecorators/
+# Same as login_required but checks for admin in the session
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if g.admin is None:
+        try:
+            if session['admin'] is None:
+                return redirect(url_for('login', next=request.url))
+            return f(*args, **kwargs)
+        except KeyError:
             return redirect(url_for('login', next=request.url))
-        return f(*args, **kwargs)
     return decorated_function
 
 
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
+# Generates random salt, encrypts this and the entered password using sha256
+# then attaches the unencrypted salt after a colon
 def hash_password(password):
     # uuid is used to generate a random number
     salt = uuid.uuid4().hex
@@ -42,10 +51,13 @@ def hash_password(password):
 
 
 # Adapted from http://pythoncentral.io/hashing-strings-with-python/
+# Splits the encrypted block from the salt. Then runs the password and salt
+# encryption from hash_password and checks to see if the results match
 def hashed_password(hashed_password, user_password):
     password, salt = hashed_password.split(':')
     return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()\
         + ":" + salt
+
 
 # This AppRoute takes the user to the login page
 @app.route("/Login")
@@ -53,30 +65,38 @@ def login():
     return render_template('login/login.html', msg='')
 
 
+# This AppRoute is used to check the client login as well as add the user to the
+# Session object if login is successful
 @app.route("/CheckClientLogin", methods=['POST'])
 def checkClientLogin():
     print("Processing data")
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+
+        # Find the users password salt.
         conn = sqlite3.connect(DATABASE)
         cur = conn.cursor()
         cur.execute("SELECT Password FROM ClientAccounts WHERE Username=?",
                     (username,))
         actual_password = cur.fetchall()
         actual_password = actual_password[0][0]
+
+        # As long as the account exists
         if actual_password != "":
             password = hashed_password(actual_password, password)
             cur.execute("SELECT * FROM ClientAccounts WHERE Username=? AND\
             Password=?", (username, password))
             outcome = cur.fetchall()
+
+            # If password matched the database
             if len(outcome) > 0:
                 session['user'] = username
                 return "/Client"
             else:
                 return "/Login"
 
-
+# This AppRoute checks login as ClientLogin does but from IFAAccounts table
 @app.route("/CheckIFALogin", methods=['POST'])
 def checkIFALogin():
     print("Processing data")
@@ -100,7 +120,7 @@ def checkIFALogin():
             else:
                 return "/Login"
 
-
+# This AppRoute removes the user from the session and redirects to the login page
 @app.route("/Logout")
 def logout():
     session['user'] = None
@@ -373,7 +393,7 @@ def ExpenditureData():
 def income():
     return render_template('finances/income.html', msg='')
 
-# This AppRoute takes the user input from the form on the income page and uploads the data to the database	
+# This AppRoute takes the user input from the form on the income page and uploads the data to the database
 @app.route("/IncomeData", methods=['POST'])
 def IncomeData():
     Employment = request.form.get('Employment', default="Error")
@@ -400,7 +420,7 @@ def IncomeData():
     msg = "Completed."
     return redirect(url_for('income'))
 
-# This AppRoute takes the user to the Liabilities page	
+# This AppRoute takes the user to the Liabilities page
 @app.route("/Liabilities")
 @login_required
 def liabilities():
@@ -412,7 +432,7 @@ def liabilities():
 def affordability():
     return render_template('finances/affordability.html', msg='')
 
-# This AppRoute takes the user input from the form on the Affordability page and uploads the data to the database		
+# This AppRoute takes the user input from the form on the Affordability page and uploads the data to the database
 @app.route("/AffordabilityData", methods=['POST'])
 def AffordabilityData():
     TaxActual = request.form.get('TaxActual', default="Error")
@@ -436,5 +456,25 @@ def AffordabilityData():
 @login_required
 def assets():
     return render_template('finances/assets.html', msg='')
+
+@app.route("/AssetsData", methods=['POST'])
+def AssetsData():
+    savings = request.form.get('savings', default="0")
+    investments = request.form.get('investments', default="0")
+    property_total = request.form.get('property', default="0")
+    vehicles = request.form.get('vehicles', default="0")
+    personal = request.form.get('personal', default="0")
+    business= request.form.get('business', default="0")
+
+    conn = sqlite3.connect(DATABASE)
+    details = [(savings, investments, property_total, vehicles, personal, business)]
+    conn.executemany("INSERT INTO `Assets`('savings', 'investments',\
+                     'property', 'vehicles', 'personal', 'business') \
+                      VALUES(?, ?, ?, ?, ?, ?)", details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return render_template('finances/assets.html', msg='')
+
 if __name__ == "__main__":
     app.run(debug=True)
