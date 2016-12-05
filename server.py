@@ -47,7 +47,7 @@ def hashed_password(hashed_password, user_password):
     return hashlib.sha256(salt.encode() + user_password.encode()).hexdigest()\
         + ":" + salt
 
-
+# This AppRoute takes the user to the login page
 @app.route("/Login")
 def login():
     return render_template('login/login.html', msg='')
@@ -107,7 +107,7 @@ def logout():
     session['admin'] = None
     return redirect(url_for('login'))
 
-
+# This AppRoute takes the user input from the form on the health page and uploads the data to the database
 @app.route("/HealthData", methods=['POST'])
 def HealthData():
     GoodHealth = request.form.get('GoodHealth', default="Error")
@@ -131,7 +131,7 @@ def HealthData():
     msg = "Completed."
     return redirect(url_for('health'))
 
-
+# This AppRoute takes the user input from the form on the dependants page and uploads the data to the database
 @app.route("/DependantsData", methods=['POST'])
 def DependantsData():
     Type = request.form.get('Type', default="Error")
@@ -246,7 +246,7 @@ def AddDetails():
     msg = "Details Added."
     return msg
 
-
+# This AppRoute deletes a client from the database
 @app.route("/DeleteClient", methods=['GET', 'POST'])
 def delCustomer():
     if request.method == 'GET':
@@ -260,13 +260,13 @@ def delCustomer():
         conn.close()
         return render_template('deleteClient.html', msg="User Deleted")
 
-
+# This AppRoute takes the user to the update client page
 @app.route("/UpdateClient")
 @login_required
 def update():
     return render_template('update.html', msg='')
 
-
+# This AppRoute takes the user to the view client page
 @app.route("/ViewClient")
 @login_required
 def list():
@@ -284,60 +284,60 @@ def getData():
     msg = msg[0]
     return msg
 
-
+# This AppRoute takes the user to the Client Data page
 @app.route("/Client/ClientAdd")
 @login_required
 def customer():
     return render_template('ClientData.html', msg='')
 
-
+# This AppRoute takes the user to the Create IFA page
 @app.route("/Client/IFAAdd")
 @login_required
 def createIFA():
     return render_template('CreateIFA.html', msg='')
 
-
+# This AppRoute takes the user to the Clients page
 @app.route("/Client")
-# @login_required
+@login_required
 def clients():
     return render_template('clients.html', msg='')
 
-
+# This AppRoute takes the user to the Clietns add page
 @app.route("/Client/ClientAdd")
 def newaccount():
     return render_template('ClientData.html', msg='')
 
-
+# This AppRoute takes the user to the Client Detials page
 @app.route("/AddDetails")
 @login_required
 def details():
     return render_template('clientdetail.html', msg='')
 
-
+# This AppRoute takes the user to the Tax Status page
 @app.route("/taxStatus")
 @login_required
 def taxStatus():
     return render_template('people/taxStatus.html', msg='')
 
-
+# This AppRoute takes the user to the Occupation page
 @app.route("/Occupation")
 @login_required
 def occupation():
     return render_template('people/occupation.html', msg='')
 
-
+# This AppRoute takes the user to the Dependants page
 @app.route("/Dependants")
 @login_required
 def dependants():
     return render_template('people/dependants.html', msg='')
 
-
+# This AppRoute takes the user to the Health page
 @app.route("/Health", methods=['GET'])
 @login_required
 def health():
     return render_template('people/health.html', msg='')
 
-
+# This AppRoute takes the user to the Expenditure page
 @app.route("/Expenditure")
 @login_required
 def expenditure():
@@ -367,12 +367,13 @@ def ExpenditureData():
     msg = "Completed."
     return redirect(url_for('expenditure'))
 
-
+# This AppRoute takes the user to the Income page
 @app.route("/Income")
 @login_required
 def income():
     return render_template('finances/income.html', msg='')
 
+# This AppRoute takes the user input from the form on the income page and uploads the data to the database	
 @app.route("/IncomeData", methods=['POST'])
 def IncomeData():
     Employment = request.form.get('Employment', default="Error")
@@ -398,18 +399,20 @@ def IncomeData():
     conn.close()
     msg = "Completed."
     return redirect(url_for('income'))
-	
+
+# This AppRoute takes the user to the Liabilities page	
 @app.route("/Liabilities")
 @login_required
 def liabilities():
     return render_template('finances/liabilities.html', msg='')
 
-
+# This AppRoute takes the user to the affordability page
 @app.route("/Affordability")
 @login_required
 def affordability():
     return render_template('finances/affordability.html', msg='')
 
+# This AppRoute takes the user input from the form on the Affordability page and uploads the data to the database		
 @app.route("/AffordabilityData", methods=['POST'])
 def AffordabilityData():
     TaxActual = request.form.get('TaxActual', default="Error")
@@ -428,7 +431,7 @@ def AffordabilityData():
     msg = "Completed."
     return redirect(url_for('affordability'))
 
-
+# This AppRoute takes the user to the assets page
 @app.route("/Assets")
 @login_required
 def assets():
