@@ -1,4 +1,83 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Income </h1>
+<div class="container">
+    <h2 class="page-header">Income</h2>
+    <form action="/IncomeData" method="post">
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="Employment">Employment:</label>
+                    <input type="integer" name="Employment" class="form-control input-sm">
+                </div>
+            </div>    
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="SelfEmployment">Self-Employment:</label>
+                    <input type="integer" name="SelfEmployment" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-4">
+                <div class="form-group">
+                    <label for="Pensions">Pensions:</label>
+                    <input type="integer" name="Pensions" class="form-control input-sm">
+                </div>
+            </div>			
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="InterestOnSavings">Interest on Savings:</label>
+                    <input type="integer" name="InterestOnSavings" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-4">
+                <div class="form-group">
+                    <label for="InvestmentIncome">Investment Income:</label>
+                    <input type="integer" name="InvestmentIncome" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-4">
+                <div class="form-group">
+                    <label for="RentalIncome">Rental Income:</label>
+                    <input type="integer" name="RentalIncome" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="form-group">
+                    <label for="CapitalDisposals">Capital Disposals:</label>
+                    <input type="integer" name="CapitalDisposals" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-4">
+                <div class="form-group">
+                    <label for="Maintenance">Maintenance:</label>
+                    <input type="integer" name="Maintenance" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-4">
+                <div class="form-group">
+                    <label for="Insurance">Insurance:</label>
+                    <input type="integer" name="Insurance" class="form-control input-sm">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label for="StateBenefit">State Benefit:</label>
+                    <input type="integer" name="StateBenefit" class="form-control input-sm">
+                </div>
+            </div>
+			<div class="col-xs-6">
+                <div class="form-group">
+                    <label for="Other">Other:</label>
+                    <input type="integer" name="Other" class="form-control input-sm">
+                </div>
+            </div>
+        </div> 
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>    
+</div> 
 {%endblock%}
