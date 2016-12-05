@@ -373,7 +373,32 @@ def ExpenditureData():
 def income():
     return render_template('finances/income.html', msg='')
 
+@app.route("/IncomeData", methods=['POST'])
+def IncomeData():
+    Employment = request.form.get('Employment', default="Error")
+    SelfEmployment = request.form.get('SelfEmployment', default="Error")
+    Pensions = request.form.get('Pensions', default="Error")
+    InterestOnSavings = request.form.get('InterestOnSavings', default="Error")
+    InvestmentIncome = request.form.get('InvestmentIncome', default="Error")
+    RentalIncome = request.form.get('RentalIncome', default="Error")
+    CapitalDisposals = request.form.get('CapitalDisposals', default="Error")
+    Maintenance = request.form.get('Maintenance', default="Error")
+    Insurance = request.form.get('Insurance', default="Error")
+    StateBenefit = request.form.get('StateBenefit', default="Error")
+    Other = request.form.get('Other', default="Error")
 
+    conn = sqlite3.connect(DATABASE)
+    details = [(Employment, SelfEmployment, Pensions, InterestOnSavings, InvestmentIncome, RentalIncome, CapitalDisposals, Maintenance, Insurance, StateBenefit, Other)]
+    conn.executemany("INSERT INTO `Income`('Employment', 'SelfEmployment', 'Pensions',\
+                     'InterestOnSavings', 'InvestmentIncome', 'RentalIncome',\
+					 'CapitalDisposals', 'Maintenance', 'Insurance', 'StateBenefit',\
+					 'Other') VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                     details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return redirect(url_for('income'))
+	
 @app.route("/Liabilities")
 @login_required
 def liabilities():
