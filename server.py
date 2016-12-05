@@ -246,7 +246,7 @@ def AddDetails():
     msg = "Details Added."
     return msg
 
-
+# This AppRoute deletes a client from the database
 @app.route("/DeleteClient", methods=['GET', 'POST'])
 def delCustomer():
     if request.method == 'GET':
