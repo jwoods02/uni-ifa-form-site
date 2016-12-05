@@ -346,7 +346,26 @@ def expenditure():
 
 @app.route("/ExpenditureData", methods=['POST'])
 def ExpenditureData():
-    return("me")
+    Property = request.form.get('Property', default="Error")
+    Housekeeping = request.form.get('Housekeeping', default="Error")
+    Transport = request.form.get('Transport', default="Error")
+    Dependents = request.form.get('Dependents', default="Error")
+    Pets = request.form.get('Pets', default="Error")
+    ProffessionalFees = request.form.get('ProffesionalFees', default="Error")
+    CostOfBorrowing = request.form.get('CostOfBorrowing', default="Error")
+    RegularSavings = request.form.get('RegularSavings', default="Error")
+    ProtectionPolicies = request.form.get('ProtectionPolicies', default="Error")
+    Other = request.form.get('Other', default="Error")
+
+    conn = sqlite3.connect(DATABASE)
+    details = [(Property, Housekeeping, Transport, Dependents, Pets, ProffessionalFees, CostOfBorrowing, RegularSavings, ProtectionPolicies, Other)]
+    conn.executemany("INSERT INTO `Expenditure`('Property', 'HouseKeeping', 'Transport', 'Dependents', 'Pets',\
+                     'ProffessionalFees', 'CostOfBorrowing', 'RegularSavings', 'ProtectionPolicies', 'Other') VALUES(?, ?, ?, ?, ?, ?, ? ,? ,? ,?)",
+                     details)
+    conn.commit()
+    conn.close()
+    msg = "Completed."
+    return redirect(url_for('expenditure'))
 
 
 @app.route("/Income")
