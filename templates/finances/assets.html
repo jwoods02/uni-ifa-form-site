@@ -1,4 +1,201 @@
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
-<h1> Assets </h1>
+<div class="container">
+    <h2 class="page-header"> Assets </h2>
+    <form action="/AssetsData" method="post">
+        <!-- SAVINGS -->
+        <div class="row">
+            <div class="col-xs-9">
+                <div class="form-group">
+                    <label for="savings">
+                        <i class="fa fa-plus" data-toggle="collapse" data-target="#savings-dropdown" aria-expanded="true"></i>
+                         Savings
+                      </label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <input type="number" name="savings" class="form-control input-sm" id="savings-total" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="savings-dropdown">
+
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="bank_accounts">Bank Accounts</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="bank_accounts" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="cash_isa">Cash ISA's</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="cash_isa" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="NSI">NS&amp;I Accounts and Bonds</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="NSI" class="form-control input-sm">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- INVESTMENTS -->
+        <div class="row">
+            <div class="col-xs-9">
+                <div class="form-group">
+                    <label for="investments">
+                        <i class="fa fa-plus" data-toggle="collapse" data-target="#investments-dropdown" aria-expanded="true"></i>
+                         Investments
+                      </label>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="form-group">
+                    <input type="number" name="investments" class="form-control input-sm" id="investments-total" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="investments-dropdown">
+
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="investment_isa">Investment ISA's</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="investment_isa" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="collective">Collective Investments</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="collective" class="form-control input-sm">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-1">
+                    <div class="form-group">
+                        <label for="base">Base Asset Classes</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="base" class="form-control input-sm">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+            <!-- PROPERTY -->
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="form-group">
+                        <label for="property">Property</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="property" class="form-control input-sm" id="property-total">
+                    </div>
+                </div>
+            </div>
+
+            <!-- VEHICLES -->
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="form-group">
+                        <label for="vehicles">Vehicles</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="vehicles" class="form-control input-sm" id="vehicles-total">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONAL EFFECTS -->
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="form-group">
+                        <label for="personal">Personal Effects</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="personal" class="form-control input-sm" id="personal-total">
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUSINESS INTERESTS -->
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="form-group">
+                        <label for="business">Business Interests</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="form-group">
+                        <input type="number" name="business" class="form-control input-sm" id="business-total">
+                    </div>
+                </div>
+            </div>
+
+
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+
+<script>
+$( ".fa" ).click(function() {
+     $( this ).toggleClass( "fa-plus fa-minus");
+ });
+
+ $( "#savings-dropdown input" ).change(function() {
+     var sum = 0;
+     // http://stackoverflow.com/questions/2417553/jquery-calculate-sum-of-values-in-all-text-fields
+     $( "#savings-dropdown input" ).each(function() {
+         sum += Number($(this).val());
+     });
+     $("#savings-total").val(sum);
+});
+
+
+</script>
+
 {%endblock%}
