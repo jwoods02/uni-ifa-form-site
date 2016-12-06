@@ -180,7 +180,7 @@ def DependantsData():
     msg = "Completed."
     return redirect(url_for('dependants'))
 
-
+#The below app route creates the account for a client
 @app.route("/Client/ClientInsert", methods=['POST'])
 def ClientAddDetails():
     Forname = request.form.get('Forname', default="Error")
@@ -294,7 +294,7 @@ def list():
     headings = ["ID", "Forname", "Surname", "E-Mail", "Username", "Password"]
     return render_template('clientlist.html', msg=client_list)
 
-
+#This retrieves all data in the ClientAccounts table which is used to present a list of clients
 def getData():
     msg = []
     conn = sqlite3.connect(DATABASE)
@@ -363,7 +363,7 @@ def health():
 def expenditure():
     return render_template('finances/expenditure.html', msg='')
 
-
+#This Route takes the input from the form and inserts it into the appropriate table in the database
 @app.route("/ExpenditureData", methods=['POST'])
 def ExpenditureData():
     Property = request.form.get('Property', default="Error")
