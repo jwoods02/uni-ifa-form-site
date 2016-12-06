@@ -1,6 +1,8 @@
+<!-- Extends the nav pag and the main block (templating) -->
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
 <h1> Clients </h1>
+<!-- Below are links to different pages, it uses server routes to render pages -->
 <li><a href="\Client\ClientAdd">Create new client account here</a></li>
 <li><a href="\AddDetails">Enter details for client here</a></li>
 <li><a href="\DeleteClient">Delete a client here</a></li>

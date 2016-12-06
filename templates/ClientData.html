@@ -1,41 +1,54 @@
+<!-- Extends the nav pag and the main block (templating) -->
 {%extends 'blocks/nav.html'%} {%block mainBlock%}
+<!-- creates a container for the form to be placed inside -->
 <div class="container">
     <h2 class="page-header">Create New Client Account</h2>
+<!-- The below code gives a name to the form and creates an action when the form is submitted, it also states the request type -->
     <form class="form" id='myForm' action="/Client/ClientInsert" method="POST">
       <div class="row">
+        <!-- set the size of the input field -->
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Forname">First Name:</label>
+            <!-- The code below states input type, gives it and name and also has validation -->
             <input type="text" name="Forname" class="form-control" required="true">
           </div>
         </div>
+        <!-- set the size of the input field -->
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Surname">Surname:</label>
+            <!-- The code below states input type, gives it and name and also has validation -->
             <input type="text" name="Surname" class="form-control" required="true">
           </div>
         </div>
       </div>
       <div class="row">
+        <!-- set the size of the input field -->
         <div class="col-xs-4">
           <div class="form-group">
             <label for="eMail">Email:</label>
+            <!-- The code below states input type, gives it and name and also has validation -->
             <input type="email" name="eMail" class="form-control" required="true">
           </div>
         </div>
       </div>
       <div class="row">
+        <!-- set the size of the input field -->
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Username">Username:</label>
+            <!-- The code below states input type, gives it and name and also has validation -->
             <input type="text" name="Username" class="form-control" required="true">
           </div>
         </div>
       </div>
       <div class="row">
+        <!-- set the size of the input field -->
         <div class="col-xs-3">
           <div class="form-group">
             <label for="Password">Password:</label>
+            <!-- The code below states input type, gives it and name and also has validation -->
             <input type="text" name="Password" class="form-control" required="true">
           </div>
         </div>

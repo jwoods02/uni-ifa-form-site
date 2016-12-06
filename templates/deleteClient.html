@@ -1,5 +1,6 @@
+<!-- extends the nav page and main block -->
 {%extends 'blocks/nav.html'%} {%block mainBlock%}
-
+<!-- below states the request type and the route it calls -->
 <form method="POST" action="/DeleteClient">
   ID:
   <input type = "integer" name = "ID"><br>
@@ -7,6 +8,7 @@
   <a href=/Client>Back</a>
 
 </form>
+<!-- returns a message depending on the outcome -->
 <span id='msg'> {{ msg }} </span>
 
 
