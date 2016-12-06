@@ -1,18 +1,25 @@
+<!-- extends the nav page and the main block -->
 {%extends 'blocks/nav.html'%}
 {%block mainBlock%}
+<!-- Creates the container for the form to be created -->
 <div class="container">
     <h2 class="page-header">Expenditure</h2>
+    <!-- Below states the app route which will be called when the form is submitted and the request type it will use. -->
     <form action="/ExpenditureData" method="post">
         <div class="row">
+        <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Property">Property:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="Property" class="form-control input-sm">
                 </div>
             </div>
+            <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Housekeeping">Housekeeping:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="Housekeeping" class="form-control input-sm">
                 </div>
             </div>
@@ -21,22 +28,27 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Transport">Transport:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="Transport" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Dependents">Dependents:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                      <input type="integer" name="Dependents" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Pets">Pets:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="Pets" class="form-control input-sm">
                 </div>
             </div>
@@ -45,38 +57,47 @@
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="ProffessionalFees">Proffessional Fees:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="ProffessionalFees" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="CostOfBorrowing">Cost of borowing:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="CostOfBorrowing" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="RegularSavings">Regualar Savings:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="RegularSavings" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="ProtectionPolicies">Protection Policies:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="ProtectionPolicies" class="form-control input-sm">
                 </div>
             </div>
         </div>
         <div class="row">
+          <!-- Below states the row type, this has been used to shorten some input fields -->
             <div class="col-xs-6">
                 <div class="form-group">
                     <label for="Other">Other:</label>
+                    <!-- The line below states the type of input and gives the input field a name that is used in the server file to retrieve data -->
                     <input type="integer" name="Other" class="form-control input-sm">
                 </div>
             </div>
